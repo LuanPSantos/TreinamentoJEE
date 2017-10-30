@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource-ref>
+   <res-ref-name>jdbc/TesteServerDS</res-ref-name>
+   <jndi-name>jdbc/TesteServerDS</jndi-name>
+</resource-ref>

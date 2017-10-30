@@ -1,0 +1,4 @@
+HelloEJB/HelloEJB-ear/target/*
+HelloEJB/HelloEJB-web/target/*
+HelloEJB/HelloEJB-jar/target/*
+HelloEJB/HelloEJB-ejb/target/*
