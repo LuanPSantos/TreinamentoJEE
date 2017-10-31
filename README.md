@@ -1,4 +1,6 @@
 # Treinamento JEE + SQL
+**Menu**  
+[WIKI](WIKI/ReadMe.md)
 ## Setup do banco de dados (HSQLDB)
 Faça download do HSQLDB pelo [site oficial](http://hsqldb.org/), descompacte o arquivo e navegue até o diretório lib caso você esteja usando Linux. 
 Para criar um novo banco de dados standalone utilize o comando:
