@@ -4,3 +4,8 @@ HelloEJB/HelloEJB-lib/target/*
 HelloEJB/HelloEJB-ejb/target/*
 HelloEJB/Database/*
 HelloEJB/Database/database.log
+HelloEJB/Database/database.lck
+HelloEJB/Database/database.lck
+HelloEJB/Database/database.log
+HelloEJB/Database/database.properties
+HelloEJB/Database/database.script
