@@ -8,7 +8,7 @@
 
 ## Descrição
 
-Pesquisa de lançamentos por parte do nome do lançamento
+Pesquisa de lançamentos usando os parâmetros passados por URL, de acordo com a [RN-Criterios-de-Buscas](../Regras-de-Negocios/RN-Criterios-de-Buscas.md)
 
 ## Header
 
@@ -16,16 +16,19 @@ Pesquisa de lançamentos por parte do nome do lançamento
 
 | Atributo                          | Obrigatório | Observações                          |
 |-----------------------------------|:-----------:|--------------------------------------|
-| Nome do Atributo (case sensitive) |     S/N     | Descrição do campo e valores válidos |
+| N.H. |     N.H.     | N.H. |
 
 
 ## Atributos do Serviço
 
 **NOTA AO DESENVOLVEDOR:** Coloque aqui a lista de atributos da chamada ao WS, sua obrigatoriedade e valores válidos
 
-| Atributo                          | Obrigatório | Observações                          |
-|-----------------------------------|:-----------:|--------------------------------------|
-| Nome do Atributo (case sensitive) |     S/N     | Descrição do campo e valores válidos |
+| Atributo                          | Obrigatório | Observações                                                                           |
+|-----------------------------------|:-----------:|---------------------------------------------------------------------------------------|
+| type                              |      N      | Recebe como valores válidos a String que representa o item do enum EntryType          |
+| initialPeriod                     |      N      | Formato (dd/MM/yyyy)                                                                  |
+| finalPeriod                       |      N      | Formato (dd/MM/yyyy)                                                                  |
+| description                       |      N      | String que representa o nome ou parte dele de um lançamento                           |
 
 ## Demais Validações
 
@@ -33,7 +36,7 @@ Pesquisa de lançamentos por parte do nome do lançamento
 
 
 
-## XML Request
+## JSON Request
 
 **NOTA AO DESENVOLVEDOR:** Coloque aqui o XML de request padrão
 

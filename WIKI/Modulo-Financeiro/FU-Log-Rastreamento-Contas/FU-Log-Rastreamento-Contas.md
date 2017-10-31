@@ -63,6 +63,14 @@ _Diagrama UML: [UML-Classes-Log-Rastreamento-Contas.asta](FU-Log-Rastreamento-Co
 
 **NOTA AO DESENVOLVEDOR:** No momento, este projeto não possui interfaces gráficas com interação entre atores e sistema. Sendo assim, ainda não possui cenários de teste manuais.
 
+## Cenários de Testes Automatizados
+
+**NOTA**
+
+| Classe de Teste     | Método de Teste    |Descrição         |
+|---------------------|--------------------|------------------|
+| CL-Classe           | Método             |                  |
+
 _[Sobre o Portal de Documentação](../../About/About.md)_
 
 

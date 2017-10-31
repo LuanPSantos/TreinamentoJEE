@@ -17,9 +17,9 @@ Consulta de Lançamento de Contas Mensais.
 
 ## Regras de Negócios
 
-| Regra de Negócios | Descrição |
-|-------------------|-----------|
-| N.H.              | N.H.      |
+| Regra de Negócios                                                       | Descrição                                           |
+|-------------------------------------------------------------------------|-----------------------------------------------------|
+| [RN-Critérios de busca](Regras-de-Negocios/RN-Criterios-de-Buscas.md)   | Descreve os parâmetros para as buscas de Lançamentos|
 
 ## Casos de Uso
 
@@ -27,13 +27,11 @@ Consulta de Lançamento de Contas Mensais.
 
 ## Web Services
 
-**[WSDL](Web-Services/WSDL.md)**
+**[WADL](Web-Services/WADL.md)**
 
-| Web Service                                                                              | Descrição                                      |
-|------------------------------------------------------------------------------------------|------------------------------------------------|
-| [WS-Pesquisar Lancamentos por Período](Web-Services/WS-Pesquisar-Lancamentos-Por-Periodo.md) | Pesquisa de lançamentos por período de tempo (dia/mês/ano) |
-| [WS-Pesquisar Lancamentos por Nome](Web-Services/WS-Pesquisar-Lancamentos-Por-Nome.md) | Pesquisa de lançamentos por parte do nome do lançamento |
-| [WS-Pesquisar Lancamentos por Tipo](Web-Services/WS-Pesquisar-Lancamentos-Por-Tipo.md) | Pesquisa de lançamentos por tipo de lançamento |
+| Web Service                                                          | Descrição                                   |
+|----------------------------------------------------------------------|---------------------------------------- ----|
+| [WS-Pesquisar Lancamentos](Web-Services/WS-Pesquisar-Lancamentos.md) | Pesquisa de lançamentos                     |
 
 
 ## Estrutura de Classes
@@ -70,6 +68,14 @@ _Diagrama DER: [DER-Consulta-Lancamentos.asta](FU-Consulta-Lancamentos-Anexos/DE
 ## Cenários de Teste Manuais
 
 **NOTA AO DESENVOLVEDOR:** No momento, este projeto não possui interfaces gráficas com interação entre atores e sistema. Sendo assim, ainda não possui cenários de teste manuais.
+
+## Cenários de Testes Automatizados
+
+**NOTA**
+
+| Classe de Teste     | Método de Teste    |Descrição         |
+|---------------------|--------------------|------------------|
+| CL-Classe           | Método             |                  |
 
 _[Sobre o Portal de Documentação](../../About/About.md)_
 
