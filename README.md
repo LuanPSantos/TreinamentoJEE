@@ -15,4 +15,4 @@ Apartir de agora você já pode acessar o banco de dados da aplicação através
 #### Configurando o DataSource
 **No Glassfish**
 
-**No WildFly
+**No WildFly**
