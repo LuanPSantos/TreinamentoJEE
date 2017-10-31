@@ -17,6 +17,6 @@ public class MainResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response obterMensagem() {
-        return Response.ok(main.obterMensagem()).build();
+        return Response.ok(main.findMessage()).build();
     }
 }

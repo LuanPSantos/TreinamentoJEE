@@ -1,11 +1,9 @@
 package com.luan.beans;
 
-import com.luan.dao.MensagemDAO;
+import com.luan.dao.MessageDAO;
 import com.luan.helloejb.lib.interfaces.Main;
-import com.luan.helloejb.lib.models.Mensagem;
+import com.luan.helloejb.lib.models.Message;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
@@ -15,9 +13,9 @@ import javax.ejb.Stateless;
 public class MainBean implements Main {
 
     @EJB
-    private MensagemDAO dao;
+    private MessageDAO dao;
 
-    public MainBean(MensagemDAO dao) {
+    public MainBean(MessageDAO dao) {
         this.dao = dao;
     }
 
@@ -25,10 +23,10 @@ public class MainBean implements Main {
     }
 
     @Override
-    public Mensagem obterMensagem() {
-        Mensagem mensagem = new Mensagem();
+    public Message findMessage() {
+        Message mensagem = new Message();
         try {
-            mensagem = dao.obterMensagem();
+            mensagem = dao.findMessage();
             if (mensagem.getTexto().isEmpty()) {
                 mensagem.setTexto("Hello EJB!!");
             }
