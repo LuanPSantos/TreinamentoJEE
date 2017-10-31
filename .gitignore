@@ -2,3 +2,4 @@ HelloEJB/HelloEJB-ear/target/*
 HelloEJB/HelloEJB-web/target/*
 HelloEJB/HelloEJB-lib/target/*
 HelloEJB/HelloEJB-ejb/target/*
+HelloEJB/Database/database.lck

@@ -30,7 +30,7 @@ Consulta de Lançamento de Contas Mensais.
 **[WADL](Web-Services/WADL.md)**
 
 | Web Service                                                          | Descrição                                   |
-|----------------------------------------------------------------------|---------------------------------------- ----|
+|----------------------------------------------------------------------|---------------------------------------------|
 | [WS-Pesquisar Lancamentos](Web-Services/WS-Pesquisar-Lancamentos.md) | Pesquisa de lançamentos                     |
 
 
