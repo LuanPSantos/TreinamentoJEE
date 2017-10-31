@@ -1,7 +1,11 @@
-![Cabecalho](../../../ReadMe-Anexos/Cabecalho.png)
+
+
+  ![Cabecalho](../../../ReadMe-Anexos/Cabecalho.png)
 
 
 [About](../../About.md) :: [Organização Física](../Organizacao-Fisica.md) :: [ReadMe](ReadMe.md)
+
+<div align="right"> [Voltar para Home](../../../ReadMe.md) </div>
 
 # ReadMe
 ![](../Organizacao-Fisica-Anexos/ReadMe.png)
@@ -18,7 +22,3 @@
 Notas:
 1.  Os artefatos estão marcados em **negrito**
 2.  As pastas em texto plano
-
-_[Voltar para Documentação do Software](../../../ReadMe.md)_
-
-![Rodape](../../../ReadMe-Anexos/Rodape.png)

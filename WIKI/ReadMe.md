@@ -2,54 +2,34 @@
 
 [Home](ReadMe.md)
 
-
-<div style="color:green">
-  Template da página inicial de documentação do produto de software.  Os textos de instruções estão em verde e devem ser removidos do artefato final, inclusive as tags `div`
-  Os links para diagramas levam aos respectivos templates
-</div>
-
-# Nome do Produto
-
 ## Descrição
 
-<div style="color:green">
-  Texto livre introduzindo o produto e suas principais características. Opcionalmente utilize sub-títulos de níveis 2, 3, etc, para organizar o conteúdo conforme for necessário.
-</div>
+Documentação do projeto do exercício prático do treinamento em **JEE e SQL**.
+
+Este portal terá toda a documentação padrão de **Eng. de Software** dos projetos **Logic**, exceto:
+- **Casos de Uso e Casos de Teste Manuais**: Serão adicionados em evoluções futuras deste projeto, quando este passar a considerar interações com atores através de interfaces gráticas
+- **Documentação de Arquitetura**: Será adicionada se houver execícios focados em alteração de arquitetura no futuro.
+
+## Características:
+
+- Esta documentação é individual, cada colaborador deve criar a sua.
+- Parte da documentação será fornecida. A parte faltante deverá ser gerada pelo desenvolvedor e será objeto de avaliação, veja as **NOTAS AO DESENVOLVEDOR** em cada página.
+- Demais instruções técnicas em: [Intruções Trilha JEE-SQL](How-To-Tecnico/Intrucoes-Trilha-JEE-SQL/Intrucoes-Trilha-JEE-SQL.md)
 
 ## Módulos do Software
 
-<div style="color:green">
-  Tabela com a lista dos módulos do software, ordenada alfabeticamente de A->Z.
-  <br>
-</div>
-
-| Módulo                                                    | Descrição                                                                                                                                    |
-|-----------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| [Nome-do-Modulo](Modulo-Nome-do-Modulo/Modulo-Nome-do-Modulo.md) | <div style="color:green"> Descrição sucinta do objetivo do módulo, algo que indique a principal característica das funcionalidades que ele agrega </div> |
+| Módulo                                               | Descrição                          |
+|------------------------------------------------------|------------------------------------|
+| [Financeiro](Modulo-Financeiro/Modulo-Financeiro.md) | Módulo Financeiro                  |
+| [Segurança](Modulo-Seguranca/Modulo-Seguranca.md)    | Módulo de Segurança e Autenticação |
 
 
+## Documentação Técnica
 
-### Documentação Técnica
+| Documento                                                                                       | Descrição                                      |
+|-------------------------------------------------------------------------------------------------|------------------------------------------------|
+| [How-To Técnico](How-To-Tecnico/How-To-Tecnico.md)                                              | Páginas com procedimentos técnicos específicos |
 
-<div style="color:green">
-  Seção com a lista de documentos técnicos. São obrigatórios os itens: **Arquitetura do Sistema** e **How-to Técnico**.
-
-  **Opcionalmente** podem ser adicionados diagramas técnicos que descrevam alguma característica complexa do **SISTEMA**
-  Podem ser, por exemplo:  diagramas comportamentais do tipo Atividades, Sequencia ou Estado que descrevam algum processo ou interação complexa, ou a transição de estados de algum elemento importante do sistema.
-  Deve-se atentar sempre que o **escopo** destes diagramas é o **SISTEMA**
-  Os diagramas opcionais devem ser armazenados na pasta: `ReadMe-Anexos`
-
-  A tabela deve ser organizada de modo que os itens obrigatórios figurem em 1o lugar. Os itens opcionais deve ser ordenados alfabeticamente de A->Z.
-  <br>
-</div>
-
-| Documento                                                                                                 | Descrição                                                                                                                |
-|-----------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
-| [Arquitetura do Sistema](Arquitetura/Arquitetura-Index.md)                                                      | Descrição da arquitetura técnica do sistema                                                                              |
-| [How-To Técnico](How-To-Tecnico/How-To-Tecnico.md)                                                        | Páginas com procedimentos técnicos específicos                                                                           |
-| [UML-Atividades-Processo-Integracao-XYZ.asta](ReadMe-Anexos/UML-Atividades-Processo-Integracao-XYZ.asta)   | <div style="color:green"> Descrição suscinta do processo descrito no diagrama </div>                                     |
-| [UML-Sequencia-Processo-Comunicacao-XPTO.asta](ReadMe-Anexos/UML-Sequencia-Processo-Comunicacao-XPTO.asta) | <div style="color:green"> Descrição suscinta da interação descrita no diagrama </div>                                     |
-| [UML-Estado-Status-ABC.asta](ReadMe-Anexos/UML-Estado-Status-ABC.asta)                                     | <div style="color:green"> Descrição suscinta do elemento cuja transição de estado está sendo elucidada no diagrama </div> |
 
 _[Sobre o Portal de Documentação](About/About.md)_
 

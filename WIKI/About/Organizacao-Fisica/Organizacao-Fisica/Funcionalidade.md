@@ -1,8 +1,11 @@
-![Cabecalho](../../../ReadMe-Anexos/Cabecalho.png)
+
+  
+  ![Cabecalho](../../../ReadMe-Anexos/Cabecalho.png)
 
 
 [About](../../About.md) :: [Organização Física](../Organizacao-Fisica.md) :: [Funcionalidade](Funcionalidade.md)
 
+<div align="right"> [Voltar para Home](../../../ReadMe.md) </div>
 
 # Funcionalidade
 ![](../Organizacao-Fisica-Anexos/Funcionalidade.png)
@@ -26,8 +29,3 @@ Conteúdo das Sub-pastas:
 Notas:
 1.  Os artefatos estão marcados em **negrito**
 2.  As pastas em texto plano
-
-_[Voltar para Documentação do Software](../../../ReadMe.md)_
-
-
-![Rodape](../../../ReadMe-Anexos/Rodape.png)

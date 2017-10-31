@@ -3,40 +3,13 @@
 [Home](../ReadMe.md) :: [How-to Técnico](How-To-Tecnico.md)
 
 
-<div style="color:green">
-  Template da página com os How-To Técnicos do sistema. Os textos de instruções estão em verde e devem ser removidos do artefato final, inclusive as tags `div`
-</div>
-
-
 # How-To Técnico
 
-<div style="color:green">
+**NOTA AO DESENVOLVEDOR:** Adicione aqui qualquer procedimento que precise documentar, como instalação e configuração de ambiente, por exemplo.
 
-  Esta é uma página para documentar os procedimentos técnicos do sistema.
-
-  Seu conteúdo é uma tabela com a lista de procedimentos. Opcionalmente, pode ser organizado em várias tabelas separadas por contexto, conforme a necessidade.
-
-  São considerados procedimentos técnicos:
-  1. Procedimento de implantação do sistema
-  2. Detalhes de configuração de acesso a base de dados
-  3. Configuração de ferramentas
-  4. Etc
-
-  Cada procedimento deve ser detalhado em uma página específica, em uma pasta separada (veja o template)
-
-  <b>Nota sobre documentação de parâmetros:</b>
-
-  Parâmetros que definem ou alteram o comportamento da aplicação, ou como são processados e efetuados cálculos devem ser documentados como Regra de negócios nas páginas de Funcionalidades. Neste caso, deve ser criada uma RN, nomeada, por exemplo: Parâmetros Funcionalidade ABC.. com a lista de parâmetros que esta funcionalidade precisa para operar, seu significado e valores válidos.
-
-  Parâmetros estritamente técnicos, como exemplo (i) parâmetros de conexão com base de dados, (ii) parâmetros de autenticação com web-services, (iii) pastas de gravação de arquivos, etc, devem ser documentados na seção de How-to Técnicos
-
-
-</div>
-
-
-| Procedimento                                                             | Descrição                                                                  |
-|----------------------------------------------------------------------|----------------------------------------------------------------------------|
-| [Nome-do-Procedimento](Nome-do-Procedimento/Nome-do-Procedimento.md) | <div style="color:green">Descrição do procedimento sendo documentado</div> |
+| Procedimento                                                                     | Descrição                                 |
+|----------------------------------------------------------------------------------|-------------------------------------------|
+| [Intruções Trilha JEE-SQL](Intrucoes-Trilha-JEE-SQL/Intrucoes-Trilha-JEE-SQL.md) | Instruções para realização dos exercícios |
 
 _[Sobre o Portal de Documentação](../About/About.md)_
 
