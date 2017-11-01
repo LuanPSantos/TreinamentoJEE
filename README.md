@@ -15,7 +15,7 @@ Ele abrirá uma janela de configuração.
 Apartir de agora você já pode acessar o banco de dados da aplicação através da ferramenta Admin do HSQLDB.
 
 #### Configurando o DataSource
-**No Glassfish**  
+**No Glassfish 5**  
 Com o Glassfish rodando entre no seu painel de administração através de [localhost:4848](localhost:4848). Vá até a aba JDBC e clique em **JDBC Connection Pools** para criar um novo pool de conexões.  
 - Click em **new**
 - Dê um nome ao pool (ex: exemploPool)
