@@ -32,4 +32,5 @@ Note que **database** é o nome do banco de dados!
 - Dê um nome ao seu resource que siga o padrão **jdbc/NomeDoResourceDS** pois estamos criando um Resource JDBC de um DataSource. Ele será usado para realizar lookup do CDI
 - Em **Pool Name** selecione o pool criado anteriormente
 - Clique em **OK** para finalizar. Apartir de agora o DataSource está pronto para o uso dentro da aplicação.  
+
 **No WildFly**
