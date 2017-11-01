@@ -2,15 +2,15 @@ package com.luan.helloejb.lib.models;
 
 import java.io.Serializable;
 
-public class Mensagem implements Serializable{
+public class Message implements Serializable{
     
     private String texto;
 
-    public Mensagem(String texto) {
+    public Message(String texto) {
         this.texto = texto;
     }
 
-    public Mensagem() {
+    public Message() {
     }
 
     public String getTexto() {

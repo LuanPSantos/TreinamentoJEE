@@ -8,7 +8,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ejb.EJB;
 
-@Path("/main")
+@Path("main")
 public class MainResource {
     
     @EJB
@@ -17,6 +17,6 @@ public class MainResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response obterMensagem() {
-        return Response.ok(main.obterMensagem()).build();
+        return Response.ok(main.findMessage()).build();
     }
 }

@@ -1,6 +1,6 @@
 package com.luan.dao;
 
-import com.luan.helloejb.lib.models.Mensagem;
+import com.luan.helloejb.lib.models.Message;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,9 +11,9 @@ import javax.ejb.Stateless;
 import javax.sql.DataSource;
 
 @Stateless
-public class MensagemDAO {
+public class MessageDAO {
 
-    @Resource(lookup = "jdbc/MensagemDS")
+    @Resource(lookup = "jdbc/MessageDS")
     private DataSource dataSource;
 
     private Connection connection;
@@ -28,9 +28,9 @@ public class MensagemDAO {
         }
     }
 
-    public Mensagem obterMensagem() throws SQLException {
-        String mensagem = "";
-        String sql = "SELECT * FROM Mensagem";
+    public Message findMessage() throws SQLException {
+        String message = "";
+        String sql = "SELECT * FROM Message";
 
         PreparedStatement statement = connection.prepareStatement(sql);
 
@@ -38,9 +38,9 @@ public class MensagemDAO {
 
         ResultSet resultSet = statement.getResultSet();
         if (resultSet.next()) {
-            mensagem = resultSet.getString("texto");
+            message = resultSet.getString("textMessage");
         }
 
-        return new Mensagem(mensagem);
+        return new Message(message);
     }
 }

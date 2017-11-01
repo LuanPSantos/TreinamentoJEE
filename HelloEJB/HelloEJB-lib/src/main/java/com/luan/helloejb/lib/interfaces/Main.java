@@ -1,8 +1,8 @@
 package com.luan.helloejb.lib.interfaces;
 
-import com.luan.helloejb.lib.models.Mensagem;
+import com.luan.helloejb.lib.models.Message;
 
 public interface Main {
 
-    public Mensagem obterMensagem();
+    public Message findMessage();
 }
