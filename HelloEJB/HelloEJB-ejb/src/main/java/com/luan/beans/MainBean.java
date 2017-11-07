@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
+import javax.enterprise.event.Event;
+import javax.inject.Inject;
 
 @Stateless
 @Local(Main.class)
@@ -14,9 +16,13 @@ public class MainBean implements Main {
 
     @EJB
     private MessageDAO dao;
+    
+    @Inject
+    private Event<Message> messageEvent;
 
-    public MainBean(MessageDAO dao) {
+    public MainBean(MessageDAO dao, Event<Message> messageEvent) {
         this.dao = dao;
+        this.messageEvent = messageEvent;
     }
 
     public MainBean() {
@@ -34,6 +40,7 @@ public class MainBean implements Main {
             mensagem.setTexto("Deu ruim");
         }
 
+        messageEvent.fire(mensagem);
         return mensagem;
     }
 }

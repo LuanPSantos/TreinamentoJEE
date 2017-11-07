@@ -3,6 +3,7 @@ package com.luan.beans;
 import com.luan.dao.MessageDAO;
 import com.luan.helloejb.lib.models.Message;
 import java.sql.SQLException;
+import javax.enterprise.event.Event;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,10 +12,14 @@ import static org.mockito.Mockito.*;
 public class MainBeanTest {
 
     private MessageDAO mockMensagemDAO;
+    private Event<Message> messageEvent;
 
     @Before
     public void inicializar() {
         mockMensagemDAO = mock(MessageDAO.class);
+        messageEvent = mock(Event.class);
+        
+        doNothing().when(messageEvent).fire(any(Message.class));
     }
 
     @Test
@@ -22,7 +27,7 @@ public class MainBeanTest {
 
         when(mockMensagemDAO.findMessage()).thenReturn(new Message("Standalone funcionando"));
 
-        MainBean mainBean = new MainBean(mockMensagemDAO);
+        MainBean mainBean = new MainBean(mockMensagemDAO, messageEvent);
 
         Message menagem = mainBean.findMessage();
 
@@ -35,7 +40,7 @@ public class MainBeanTest {
         mockMensagemDAO = mock(MessageDAO.class);
         when(mockMensagemDAO.findMessage()).thenReturn(new Message(""));
 
-        MainBean mainBean = new MainBean(mockMensagemDAO);
+        MainBean mainBean = new MainBean(mockMensagemDAO, messageEvent);
 
         Message menagem = mainBean.findMessage();
 
@@ -48,7 +53,7 @@ public class MainBeanTest {
         mockMensagemDAO = mock(MessageDAO.class);
         when(mockMensagemDAO.findMessage()).thenThrow(new SQLException());
 
-        MainBean mainBean = new MainBean(mockMensagemDAO);
+        MainBean mainBean = new MainBean(mockMensagemDAO, messageEvent);
 
         Message menagem = mainBean.findMessage();
 
