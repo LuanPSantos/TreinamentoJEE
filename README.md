@@ -33,4 +33,40 @@ Note que **database** é o nome do banco de dados!
 - Em **Pool Name** selecione o pool criado anteriormente
 - Clique em **OK** para finalizar. Apartir de agora o DataSource está pronto para o uso dentro da aplicação.  
 
-**No WildFly**
+**No WildFly**  
+Para utilizar o HSQLDB com o WildFly é necessário alterar o jar do banco para adicionar um novo arquivo com o nome completo da classe do seu Driver.  
+- No mesmo diretório do jar cria a seguinte estrutura de diretórios: **META-INF/services/**; dentro do diretório services crie o arquivo **java.sql.Driver** contendo uma única linha, que deve ser o nome completo da classe do Driver do HSQLDB: **org.hsqldb.jdbc.JDBCDriver**.  
+- Agora é necessário atualizar o jar do HSQLDB. para isso execute o comando:  
+```
+jar -uf jdbc-driver.jar META-INF/services/java.sql.Driver
+```
+**DataSource**  
+Para criar o datasource será utilizado o jboss-cli, que é um utilitário que vem junto com o WildFly e fica dentro do diretório bin.  
+- Com o WildFly rodando, execute o jboss-cli e digite **connect**.  
+- Com o seguinte comando, é criado um novo module:  
+```
+module add --name=<<nome_module>> --resources=<<caminho/arquivo_do_banco.jar>> --dependencies=javax.api,javax.transaction.api
+```
+```
+module add --name=org.hsqldb --resources=hsqldb.jar --dependencies=javax.api,javax.transaction.api
+```
+- Agora é necessário criar um Driver:  
+```
+/subsystem=datasources/jdbc-driver=<<nome_driver>>:add(driver-module-name=<<nome_module>>,driver-name=<<nome_driver>>,driver-class-name=<<nome_classe_driver>>)
+```
+```
+/subsystem=datasources/jdbc-driver=hsqldb:add(driver-module-name=org.hsqldb,driver-name=hsqldb,driver-class-name=org.hsqldb.jdbc.JDBCDriver)
+```
+- E por fim, para criar o Datasource:
+```
+/subsystem=datasources/data-source=<<nome_datasource>>:add(jndi-name=<<nome_jndi>>, driver-name=<<nome_driver>>, connection-url=<<caminho_completo_banco>>,user-name=<<usuari>>,password=<<senha>>)
+```
+```
+/subsystem=datasources/data-source=TesteDS:add(jndi-name=java:jboss/datasources/TesteDS, driver-name=hsqldb, connection-url=jdbc:hsqldb:file:/home/luan/Documentos/TreinamentoJEE/TreinamentoJEE/HelloEJB/Database/database,user-name=root,password=root)
+```
+- **OBS**: é recomendado usar a interface de admin do wildfly para revisar os dados, pois pode ser que as barras (/) não sejam inseridas corretamente. Nesse caso, basta atualizar utilizando o próprio admin.
+
+
+
+
+
