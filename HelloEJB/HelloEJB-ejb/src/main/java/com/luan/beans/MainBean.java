@@ -3,7 +3,10 @@ package com.luan.beans;
 import com.luan.dao.MessageDAO;
 import com.luan.helloejb.lib.interfaces.Main;
 import com.luan.helloejb.lib.models.Message;
+import com.luan.jms.producers.MessageJMSProducer;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
@@ -18,6 +21,9 @@ public class MainBean implements Main {
     private MessageDAO dao;
     
     @Inject
+    private MessageJMSProducer producer;
+    
+    @Inject
     private Event<Message> messageEvent;
 
     public MainBean(MessageDAO dao, Event<Message> messageEvent) {
@@ -29,10 +35,10 @@ public class MainBean implements Main {
     }
 
     @Override
-    public Message findMessage() {
+    public Message findMessage(String text) {
         Message mensagem = new Message();
         try {
-            mensagem = dao.findMessage();
+            mensagem = dao.findMessage(text);
             if (mensagem.getTexto().isEmpty()) {
                 mensagem.setTexto("Hello EJB!!");
             }
@@ -42,5 +48,19 @@ public class MainBean implements Main {
 
         messageEvent.fire(mensagem);
         return mensagem;
+    }
+
+    @Override
+    public List<Message> findAllMessage() {
+        List<Message> messages = new ArrayList<>();
+        try{
+            messages = dao.findAllMessage();
+        }catch(Exception e){
+            messages.add(new Message("Deu ruim"));
+        }
+        
+        producer.sendToQueue(messages.get(0));
+        
+        return messages;
     }
 }
