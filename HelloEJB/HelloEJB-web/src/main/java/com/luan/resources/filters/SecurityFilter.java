@@ -59,7 +59,7 @@ public class SecurityFilter implements ContainerRequestFilter, ContainerResponse
         if (headerString != null) {
             List<Object> values = new ArrayList<>();
             values.add(headerString);
-            values.add(main.findMessage().getTexto());
+            values.add(main.findAllMessage().get(0).getTexto());
 
             responseContext.getHeaders().put(AUTHORIZATION_HEADER_KEY, values);
         }

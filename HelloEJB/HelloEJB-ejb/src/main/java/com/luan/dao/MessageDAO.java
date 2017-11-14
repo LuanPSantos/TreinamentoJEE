@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
@@ -33,17 +35,19 @@ public class MessageDAO {
     public void end() {
         try {
             connection.close();
+            connection = null;
         } catch (SQLException ex) {
             System.out.println("Erro ao fechar a conexão");
             ex.printStackTrace();
         }
     }
 
-    public Message findMessage() throws SQLException {
+    public Message findMessage(String text) throws SQLException {
         String message = "";
-        String sql = "SELECT * FROM Message";
+        String sql = "SELECT * FROM Message where textMessage like ?";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, "%".concat(text).concat("%"));
             statement.execute();
             try (ResultSet resultSet = statement.getResultSet()) {
                 if (resultSet.next()) {
@@ -62,5 +66,23 @@ public class MessageDAO {
             statement.setString(1, message.getTexto() + ", porque sim :)");
             statement.execute();
         }
+    }
+
+    public List<Message> findAllMessage() throws SQLException {
+        List<Message> messages = new ArrayList<>();
+        String sql = "SELECT * FROM Message";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.execute();
+
+            try (ResultSet resultSet = statement.getResultSet()) {
+                while (resultSet.next()) {
+                    Message message = new Message(resultSet.getString("textMessage"));
+                    messages.add(message);
+                }
+            }
+        }
+
+        return messages;
     }
 }

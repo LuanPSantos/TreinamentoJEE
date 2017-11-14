@@ -7,6 +7,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ejb.EJB;
+import javax.ws.rs.QueryParam;
 
 @Path("main")
 public class MainResource {
@@ -16,7 +17,14 @@ public class MainResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response obterMensagem() {
-        return Response.ok(main.findMessage()).build();
+    public Response findMessage(@QueryParam("text") String text) {
+        return Response.ok(main.findMessage(text)).build();
+    }
+    
+    @GET
+    @Path("all")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findAllMessages(){
+        return Response.ok(main.findAllMessage()).build();
     }
 }

@@ -25,11 +25,11 @@ public class MainBeanTest {
     @Test
     public void deve_retornar_a_mensagem_de_sucesso() throws Exception {
 
-        when(mockMensagemDAO.findMessage()).thenReturn(new Message("Standalone funcionando"));
+        when(mockMensagemDAO.findMessage(any(String.class))).thenReturn(new Message("Standalone funcionando"));
 
         MainBean mainBean = new MainBean(mockMensagemDAO, messageEvent);
 
-        Message menagem = mainBean.findMessage();
+        Message menagem = mainBean.findMessage(any(String.class));
 
         assertEquals("Standalone funcionando", menagem.getTexto());
     }
@@ -38,11 +38,11 @@ public class MainBeanTest {
     public void deve_retornar_a_mensagem_padrao_quando_nao_ha_dados() throws Exception {
 
         mockMensagemDAO = mock(MessageDAO.class);
-        when(mockMensagemDAO.findMessage()).thenReturn(new Message(""));
+        when(mockMensagemDAO.findMessage(any(String.class))).thenReturn(new Message(""));
 
         MainBean mainBean = new MainBean(mockMensagemDAO, messageEvent);
 
-        Message menagem = mainBean.findMessage();
+        Message menagem = mainBean.findMessage(any(String.class));
 
         assertEquals("Hello EJB!!", menagem.getTexto());
     }
@@ -51,11 +51,11 @@ public class MainBeanTest {
     public void deve_retornar_a_mensagem_de_erro() throws Exception {
 
         mockMensagemDAO = mock(MessageDAO.class);
-        when(mockMensagemDAO.findMessage()).thenThrow(new SQLException());
+        when(mockMensagemDAO.findMessage(any(String.class))).thenThrow(new SQLException());
 
         MainBean mainBean = new MainBean(mockMensagemDAO, messageEvent);
 
-        Message menagem = mainBean.findMessage();
+        Message menagem = mainBean.findMessage(any(String.class));
 
         assertEquals("Deu ruim", menagem.getTexto());
     }
