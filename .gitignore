@@ -9,3 +9,4 @@ HelloEJB/Database/database.lck
 HelloEJB/Database/database.log
 HelloEJB/Database/database.properties
 HelloEJB/Database/database.script
+/myfin/target/
