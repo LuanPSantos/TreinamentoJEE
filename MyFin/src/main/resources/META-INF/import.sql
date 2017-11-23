@@ -26,6 +26,6 @@ insert into EntryType(type_value) values
     ('OUTROS');
 
 insert into Entry(entry_description, entry_date, entry_value, entry_type_id) values
-    ('Teste','2017-11-23', 100.0, 1);
+    ('Teste', PARSEDATETIME('2017-11-23','yyyy.MM.dd'), 100.0, 1);
 
 -- select * from Entry e inner join EntryType t where e.entry_type_id = t.type_id;

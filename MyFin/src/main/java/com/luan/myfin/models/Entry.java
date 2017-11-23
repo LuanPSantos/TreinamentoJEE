@@ -2,14 +2,18 @@ package com.luan.myfin.models;
 
 import com.luan.myfin.enuns.EntryType;
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Objects;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Entry implements Serializable {
 
     private Long id;
     private String description;
-    private LocalDate date;
+    private Date date;
     private Double value;
     private EntryType type;
 
@@ -38,11 +42,11 @@ public class Entry implements Serializable {
     }
 
     public LocalDate getDate() {
-        return date;
+        return date.toLocalDate();
     }
 
     public void setDate(LocalDate date) {
-        this.date = date;
+        this.date = Date.valueOf(date);
     }
 
     public EntryType getType() {

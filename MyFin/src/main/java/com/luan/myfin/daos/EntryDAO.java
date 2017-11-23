@@ -8,8 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.Instant;
-import java.time.LocalDate;
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.sql.DataSource;
@@ -35,10 +33,10 @@ public class EntryDAO {
 
             statement.execute();
 
-            ResultSet resultSet = statement.getResultSet();
+            ResultSet resultSet = statement.getGeneratedKeys();
 
             if (resultSet.next()) {
-                entry.setId(resultSet.getLong("entry_id"));
+                entry.setId(resultSet.getLong(1));
             }
 
             resultSet.close();
@@ -79,7 +77,7 @@ public class EntryDAO {
 
                 entry.setId(resultSet.getLong("entry_id"));
                 entry.setDescription(resultSet.getString("entry_description"));
-                entry.setDate(LocalDate.from(Instant.ofEpochMilli(resultSet.getDate("entry_date").getTime())));
+                entry.setDate(resultSet.getDate("entry_date").toLocalDate());
                 entry.setValue(resultSet.getDouble("entry_value"));
                 entry.setType(EntryType.valueOf(resultSet.getInt("entry_type_id")));
 
