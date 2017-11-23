@@ -16,6 +16,13 @@ public class EntryServiceBean implements EntryService {
     @Inject
     private EntryDAO dao;
 
+    public EntryServiceBean(EntryDAO dao) {
+        this.dao = dao;
+    }
+
+    public EntryServiceBean() {
+    }
+
     @Override
     public Entry insertEntry(Entry entry) {
         return dao.insertEntry(entry);
