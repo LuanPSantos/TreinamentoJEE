@@ -1,5 +1,8 @@
 package com.luan.myfin.ejb;
 
+import com.luan.myfin.models.Entry;
+
 public interface EntryService {
-    public String teste();
+
+    public Entry selectEntryById(Long id);
 }
