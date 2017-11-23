@@ -2,7 +2,6 @@ package com.luan.myfin.daos;
 
 import com.luan.myfin.enuns.EntryType;
 import com.luan.myfin.models.Entry;
-import com.sun.media.jfxmedia.logging.Logger;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
