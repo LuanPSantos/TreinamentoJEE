@@ -10,3 +10,6 @@ HelloEJB/Database/database.log
 HelloEJB/Database/database.properties
 HelloEJB/Database/database.script
 /myfin/target/
+/PetShop/PetShop-ear/target/
+/PetShop/PetShop-ejb/target/
+/PetShop/PetShop-web/target/
