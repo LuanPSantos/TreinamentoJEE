@@ -29,3 +29,4 @@ insert into Entry(entry_description, entry_date, entry_value, entry_type_id) val
     ('Teste', PARSEDATETIME('2017-11-23','yyyy.MM.dd'), 100.0, 1);
 
 -- select * from Entry e inner join EntryType t where e.entry_type_id = t.type_id;
+SELECT * FROM Entry WHERE 1 = 1 AND entry_date BETWEEN '2017-11-10' AND '2017-11-23';

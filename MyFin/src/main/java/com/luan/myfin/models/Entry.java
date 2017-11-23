@@ -1,6 +1,6 @@
 package com.luan.myfin.models;
 
-import com.luan.myfin.enuns.EntryType;
+import com.luan.myfin.enums.EntryType;
 import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;

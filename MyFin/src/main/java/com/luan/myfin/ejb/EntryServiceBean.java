@@ -1,7 +1,10 @@
 package com.luan.myfin.ejb;
 
 import com.luan.myfin.daos.EntryDAO;
+import com.luan.myfin.enums.EntryType;
 import com.luan.myfin.models.Entry;
+import java.sql.Date;
+import java.util.List;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -14,13 +17,13 @@ public class EntryServiceBean implements EntryService {
     private EntryDAO dao;
 
     @Override
-    public Entry selectEntryById(Long id) {
-        return dao.selectEntryById(id);
+    public Entry insertEntry(Entry entry) {
+        return dao.insertEntry(entry);
     }
 
     @Override
-    public Entry insertEntry(Entry entry) {
-        return dao.insertEntry(entry);
+    public List<Entry> selectEntries(EntryType type, Date initialPeriod, Date finalPeriod, String description) {
+        return dao.selectEntries(type, initialPeriod, finalPeriod, description);
     }
 
 }

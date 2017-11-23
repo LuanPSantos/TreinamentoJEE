@@ -1,6 +1,6 @@
 package com.luan.myfin.daos;
 
-import com.luan.myfin.enuns.EntryType;
+import com.luan.myfin.enums.EntryType;
 import com.luan.myfin.models.Entry;
 import java.sql.Connection;
 import java.sql.Date;
@@ -8,6 +8,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.sql.DataSource;
@@ -58,21 +62,76 @@ public class EntryDAO {
         return entry;
     }
 
-    public Entry selectEntryById(Long id) {
+    public List<Entry> selectEntries(EntryType type, Date initialPeriod, Date finalPeriod, String description) {
+        System.out.println(initialPeriod + " - " + finalPeriod);
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
-            String sql = "SELECT * FROM Entry WHERE entry_id = ?";
+            StringBuilder sql = new StringBuilder("SELECT * FROM Entry WHERE 1 = 1 ");
 
-            PreparedStatement statement = connection.prepareStatement(sql);
+            //Solução para gardar a sequencia certa de indices dos parametro ? do statemet
+            int index = 0;
+            Map<String, Integer> indexStatement = new HashMap<>();
+            if (type != null) {
+                sql.append("AND entry_type_id = ? ");
+                indexStatement.put("entry_type_id", ++index);
+            }
 
-            statement.setLong(1, id);
+            if (initialPeriod != null || finalPeriod != null) {
+                if (initialPeriod != null && finalPeriod == null) {
+                    sql.append("AND entry_date >= ? ");
+                    indexStatement.put("entry_date", ++index);
+                }
+
+                if (initialPeriod == null && finalPeriod != null) {
+                    sql.append("AND entry_date <= ? ");
+                    indexStatement.put("entry_date", ++index);
+                }
+
+                if (initialPeriod != null && finalPeriod != null) {
+                    sql.append("AND entry_date BETWEEN ? AND ? ");
+                    indexStatement.put("entry_date_left", ++index);
+                    indexStatement.put("entry_date_right", ++index);
+                }
+            }
+
+            if (description != null) {
+                sql.append("AND entry_description like ? ");
+                indexStatement.put("entry_description", ++index);
+            }
+
+            System.out.println("STRING SQL ==> " + sql.toString());
+            PreparedStatement statement = connection.prepareStatement(sql.toString());
+
+            if (type != null) {
+                statement.setInt(indexStatement.get("entry_type_id"), type.getId());
+            }
+
+            if (initialPeriod != null || finalPeriod != null) {
+                if (initialPeriod != null && finalPeriod == null) {
+                    statement.setDate(indexStatement.get("entry_date"), initialPeriod);
+                }
+
+                if (initialPeriod == null && finalPeriod != null) {
+                    statement.setDate(indexStatement.get("entry_date"), finalPeriod);
+                }
+
+                if (initialPeriod != null && finalPeriod != null) {
+                    statement.setDate(indexStatement.get("entry_date_left"), initialPeriod);
+                    statement.setDate(indexStatement.get("entry_date_right"), finalPeriod);
+                }
+            }
+
+            if (description != null) {
+                statement.setString(indexStatement.get("entry_description"), "%" + description + "%");
+            }
 
             statement.execute();
 
             ResultSet resultSet = statement.getResultSet();
 
-            if (resultSet.next()) {
+            List<Entry> entries = new ArrayList<>();
+            while (resultSet.next()) {
                 Entry entry = new Entry();
 
                 entry.setId(resultSet.getLong("entry_id"));
@@ -81,11 +140,13 @@ public class EntryDAO {
                 entry.setValue(resultSet.getDouble("entry_value"));
                 entry.setType(EntryType.valueOf(resultSet.getInt("entry_type_id")));
 
-                return entry;
+                entries.add(entry);
             }
 
             resultSet.close();
             statement.close();
+
+            return entries;
         } catch (SQLException e) {
             System.err.println("Erro com banco de dados");
             e.printStackTrace();

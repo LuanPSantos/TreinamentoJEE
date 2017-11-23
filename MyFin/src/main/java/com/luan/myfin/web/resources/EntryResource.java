@@ -1,19 +1,23 @@
 package com.luan.myfin.web.resources;
 
 import com.luan.myfin.ejb.EntryService;
+import com.luan.myfin.enums.EntryType;
 import com.luan.myfin.models.Entry;
 import java.net.URI;
+import java.sql.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
+import org.apache.commons.collections.CollectionUtils;
 
 @Path("entry")
 public class EntryResource {
@@ -22,13 +26,17 @@ public class EntryResource {
     private EntryService entryService;
 
     @GET
-    @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response selectEntryById(@PathParam("id") Long id) {
-        Entry entry = entryService.selectEntryById(id);
+    public Response selectEntryById(
+            @QueryParam("type") EntryType type,
+            @QueryParam("initialPeriod") Date initialPeriod,
+            @QueryParam("finalPeriod") Date finalPeriod,
+            @QueryParam("description") String description
+    ) {
+        List<Entry> entries = entryService.selectEntries(type, initialPeriod, finalPeriod, description);
 
-        if (entry != null) {
-            return Response.ok(entry).build();
+        if (CollectionUtils.isNotEmpty(entries)) {
+            return Response.ok(entries).build();
         } else {
             return Response.noContent().build();
         }
