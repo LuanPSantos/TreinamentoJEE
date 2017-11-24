@@ -1,8 +1,9 @@
-package com.luan.myfin.ejb;
+package com.luan.myfin.ejb.services;
 
-import com.luan.myfin.daos.EntryDAO;
-import com.luan.myfin.enums.EntryType;
-import com.luan.myfin.models.Entry;
+import com.luan.myfin.base.interfaces.EntryService;
+import com.luan.myfin.ejb.daos.EntryDAO;
+import com.luan.myfin.base.enums.EntryType;
+import com.luan.myfin.base.models.Entry;
 import java.sql.Date;
 import java.util.List;
 import javax.ejb.Local;

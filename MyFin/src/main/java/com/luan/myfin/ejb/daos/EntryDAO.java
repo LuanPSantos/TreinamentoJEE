@@ -1,7 +1,7 @@
-package com.luan.myfin.daos;
+package com.luan.myfin.ejb.daos;
 
-import com.luan.myfin.enums.EntryType;
-import com.luan.myfin.models.Entry;
+import com.luan.myfin.base.enums.EntryType;
+import com.luan.myfin.base.models.Entry;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;

@@ -1,7 +1,7 @@
-package com.luan.myfin.ejb;
+package com.luan.myfin.base.interfaces;
 
-import com.luan.myfin.enums.EntryType;
-import com.luan.myfin.models.Entry;
+import com.luan.myfin.base.enums.EntryType;
+import com.luan.myfin.base.models.Entry;
 import java.sql.Date;
 import java.util.List;
 

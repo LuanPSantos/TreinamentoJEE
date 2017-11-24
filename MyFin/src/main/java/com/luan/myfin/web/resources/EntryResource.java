@@ -1,8 +1,8 @@
 package com.luan.myfin.web.resources;
 
-import com.luan.myfin.ejb.EntryService;
-import com.luan.myfin.enums.EntryType;
-import com.luan.myfin.models.Entry;
+import com.luan.myfin.base.interfaces.EntryService;
+import com.luan.myfin.base.enums.EntryType;
+import com.luan.myfin.base.models.Entry;
 import java.net.URI;
 import java.sql.Date;
 import java.util.List;
