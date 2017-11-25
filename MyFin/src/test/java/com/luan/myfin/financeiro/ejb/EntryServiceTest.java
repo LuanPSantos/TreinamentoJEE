@@ -1,4 +1,4 @@
-package com.luan.myfin.ejb;
+package com.luan.myfin.financeiro.ejb;
 
 import com.luan.myfin.daos.EntryDAO;
 import org.junit.Before;
