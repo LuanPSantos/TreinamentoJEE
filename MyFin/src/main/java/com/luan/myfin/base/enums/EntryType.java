@@ -1,4 +1,4 @@
-package com.luan.myfin.enums;
+package com.luan.myfin.base.enums;
 
 public enum EntryType {
 

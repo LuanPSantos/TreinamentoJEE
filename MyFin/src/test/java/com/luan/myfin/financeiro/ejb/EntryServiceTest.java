@@ -1,6 +1,6 @@
 package com.luan.myfin.financeiro.ejb;
 
-import com.luan.myfin.daos.EntryDAO;
+import com.luan.myfin.ejb.daos.EntryDAO;
 import org.junit.Before;
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;

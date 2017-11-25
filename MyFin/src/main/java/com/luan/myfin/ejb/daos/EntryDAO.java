@@ -1,7 +1,7 @@
-package com.luan.myfin.daos;
+package com.luan.myfin.ejb.daos;
 
-import com.luan.myfin.enums.EntryType;
-import com.luan.myfin.models.Entry;
+import com.luan.myfin.base.enums.EntryType;
+import com.luan.myfin.base.models.Entry;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.sql.DataSource;
@@ -63,7 +64,6 @@ public class EntryDAO {
     }
 
     public List<Entry> selectEntries(EntryType type, Date initialPeriod, Date finalPeriod, String description) {
-        System.out.println(initialPeriod + " - " + finalPeriod);
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
@@ -100,30 +100,38 @@ public class EntryDAO {
                 indexStatement.put("entry_description", ++index);
             }
 
-            System.out.println("STRING SQL ==> " + sql.toString());
+            System.out.println("String SQL ==> " + sql.toString());
+
             PreparedStatement statement = connection.prepareStatement(sql.toString());
 
             if (type != null) {
                 statement.setInt(indexStatement.get("entry_type_id"), type.getId());
+                System.out.println("\t" + indexStatement.get("entry_type_id") + " : " + type.getId());
             }
 
             if (initialPeriod != null || finalPeriod != null) {
                 if (initialPeriod != null && finalPeriod == null) {
                     statement.setDate(indexStatement.get("entry_date"), initialPeriod);
+                    System.out.println("\t" + indexStatement.get("entry_date") + " : " + initialPeriod);
                 }
 
                 if (initialPeriod == null && finalPeriod != null) {
                     statement.setDate(indexStatement.get("entry_date"), finalPeriod);
+                    System.out.println("\t" + indexStatement.get("entry_date") + " : " + finalPeriod);
                 }
 
                 if (initialPeriod != null && finalPeriod != null) {
                     statement.setDate(indexStatement.get("entry_date_left"), initialPeriod);
+                    System.out.println("\t" + indexStatement.get("entry_date_left") + " : " + initialPeriod);
+
                     statement.setDate(indexStatement.get("entry_date_right"), finalPeriod);
+                    System.out.println("\t" + indexStatement.get("entry_date_right") + " : " + finalPeriod);
                 }
             }
 
             if (description != null) {
                 statement.setString(indexStatement.get("entry_description"), "%" + description + "%");
+                System.out.println("\t" + indexStatement.get("entry_description") + " : " + description);
             }
 
             statement.execute();
