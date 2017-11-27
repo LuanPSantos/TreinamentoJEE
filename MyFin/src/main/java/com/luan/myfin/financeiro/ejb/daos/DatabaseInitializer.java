@@ -1,4 +1,4 @@
-package com.luan.myfin.ejb.daos;
+package com.luan.myfin.financeiro.ejb.daos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

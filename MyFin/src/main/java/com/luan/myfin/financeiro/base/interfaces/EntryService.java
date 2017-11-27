@@ -1,7 +1,7 @@
-package com.luan.myfin.base.interfaces;
+package com.luan.myfin.financeiro.base.interfaces;
 
-import com.luan.myfin.base.enums.EntryType;
-import com.luan.myfin.base.models.Entry;
+import com.luan.myfin.financeiro.base.enums.EntryType;
+import com.luan.myfin.financeiro.base.models.Entry;
 import java.sql.Date;
 import java.util.List;
 

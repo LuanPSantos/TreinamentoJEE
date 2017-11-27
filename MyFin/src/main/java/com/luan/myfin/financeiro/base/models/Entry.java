@@ -1,6 +1,6 @@
-package com.luan.myfin.base.models;
+package com.luan.myfin.financeiro.base.models;
 
-import com.luan.myfin.base.enums.EntryType;
+import com.luan.myfin.financeiro.base.enums.EntryType;
 import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
