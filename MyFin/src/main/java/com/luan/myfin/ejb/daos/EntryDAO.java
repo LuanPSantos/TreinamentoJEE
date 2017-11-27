@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiConsumer;
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.sql.DataSource;
@@ -32,7 +31,7 @@ public class EntryDAO {
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             statement.setString(1, entry.getDescription());
-            statement.setDate(2, Date.valueOf(entry.getDate()));
+            statement.setDate(2, entry.getDate());
             statement.setDouble(3, entry.getValue());
             statement.setInt(4, entry.getType().getId());
 
@@ -144,7 +143,7 @@ public class EntryDAO {
 
                 entry.setId(resultSet.getLong("entry_id"));
                 entry.setDescription(resultSet.getString("entry_description"));
-                entry.setDate(resultSet.getDate("entry_date").toLocalDate());
+                entry.setDate(resultSet.getDate("entry_date"));
                 entry.setValue(resultSet.getDouble("entry_value"));
                 entry.setType(EntryType.valueOf(resultSet.getInt("entry_type_id")));
 

@@ -26,6 +26,7 @@
                 <type>pom</type>
             </dependency>
             
+            <!-- nao tenho certeza, acredito que esse cara faz buscas por dependias ou carrega no tempo de teste -->
             <dependency>
                 <groupId>org.jboss.arquillian</groupId>
                 <artifactId>arquillian-bom</artifactId>
@@ -80,22 +81,40 @@
             <scope>test</scope>
         </dependency>
         
-        <!-- Brought in via WildFly Swarm `bom` -->
+        <!-- REST EASY para fazer a chamada rest no endpoint -->
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-client</artifactId>
+            <version>3.1.4.Final</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- recursos do shrinkwrap para manipular e carregar o pom -->
+        <dependency>
+            <groupId>org.jboss.shrinkwrap.resolver</groupId>
+            <artifactId>shrinkwrap-resolver-impl-maven</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- jsckson para fazer a serialização em json dos objetos -->
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jackson-provider</artifactId>
+            <version>2.3.4.Final</version>
+        </dependency>
+             
+        <!-- Brought in via WildFly Swarm `bom` - depencia do arquillian -->
         <dependency>
             <groupId>org.wildfly.swarm</groupId>
             <artifactId>arquillian</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- Brought in via Arquillian BOM, see dependencyManagement section above -->
+        <!-- Brought in via Arquillian BOM, see dependencyManagement section above - arquillian com junit-->
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
-            <version>1.1.14.Final</version>
             <scope>test</scope>
         </dependency>
-
-
-
 
         <!-- Java EE 7 dependency -->
         <dependency>

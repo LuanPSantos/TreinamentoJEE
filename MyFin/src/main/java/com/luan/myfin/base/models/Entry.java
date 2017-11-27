@@ -41,12 +41,12 @@ public class Entry implements Serializable {
         this.description = description;
     }
 
-    public LocalDate getDate() {
-        return date.toLocalDate();
+    public Date getDate() {
+        return this.date;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = Date.valueOf(date);
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public EntryType getType() {
