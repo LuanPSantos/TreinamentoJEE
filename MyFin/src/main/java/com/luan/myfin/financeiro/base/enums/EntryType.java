@@ -1,4 +1,4 @@
-package com.luan.myfin.base.enums;
+package com.luan.myfin.financeiro.base.enums;
 
 public enum EntryType {
 
