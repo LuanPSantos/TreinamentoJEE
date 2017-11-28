@@ -3,7 +3,7 @@ package com.luan.myfin;
 import com.luan.myfin.financeiro.base.enums.EntryType;
 import com.luan.myfin.financeiro.base.interfaces.EntryService;
 import com.luan.myfin.financeiro.base.models.Entry;
-import com.luan.myfin.financeiro.ejb.EntryResourceIT;
+import com.luan.myfin.financeiro.ejb.EntryResourceIntegrationTest;
 import com.luan.myfin.financeiro.ejb.daos.DatabaseInitializer;
 import com.luan.myfin.financeiro.ejb.daos.EntryDAO;
 import com.luan.myfin.financeiro.ejb.services.EntryServiceBean;
@@ -43,7 +43,7 @@ public class ArquillianInitializerIT {
                 EntryServiceBean.class,
                 App.class,
                 EntryResource.class,
-                EntryResourceIT.class,
+                EntryResourceIntegrationTest.class,
                 ArquillianInitializerIT.class
         );
 

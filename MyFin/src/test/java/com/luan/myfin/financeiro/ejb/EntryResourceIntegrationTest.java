@@ -1,5 +1,6 @@
 package com.luan.myfin.financeiro.ejb;
 
+import com.luan.myfin.ArquillianInitializerIT;
 import com.luan.myfin.financeiro.base.enums.EntryType;
 import com.luan.myfin.financeiro.base.models.Entry;
 import java.sql.Date;
@@ -19,7 +20,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
-public class EntryResourceIT {
+public class EntryResourceIntegrationTest extends ArquillianInitializerIT {
 
     Client client;
     WebTarget target;
