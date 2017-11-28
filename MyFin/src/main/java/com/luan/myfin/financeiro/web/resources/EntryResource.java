@@ -8,10 +8,12 @@ import java.sql.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
@@ -53,6 +55,28 @@ public class EntryResource {
             return Response.created(uri).entity(newEntry).build();
         } else {
             return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+    }
+
+    @DELETE
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteEntry(@PathParam("id") Long id) {
+        entryService.deleteEntry(id);
+
+        return Response.ok().build();
+    }
+
+    @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response selectEntryById(@PathParam("id") Long id) {
+        Entry entry = entryService.selectEntryById(id);
+
+        if (entry != null) {
+            return Response.ok(entry).build();
+        } else {
+            return Response.noContent().build();
         }
     }
 }

@@ -34,4 +34,14 @@ public class EntryServiceBean implements EntryService {
         return dao.selectEntries(type, initialPeriod, finalPeriod, description);
     }
 
+    @Override
+    public void deleteEntry(Long id) {
+        dao.deleteEntry(id);
+    }
+
+    @Override
+    public Entry selectEntryById(Long id) {
+        return dao.selectEntryById(id);
+    }
+
 }

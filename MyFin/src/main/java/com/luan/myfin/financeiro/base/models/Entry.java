@@ -3,7 +3,6 @@ package com.luan.myfin.financeiro.base.models;
 import com.luan.myfin.financeiro.base.enums.EntryType;
 import java.io.Serializable;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

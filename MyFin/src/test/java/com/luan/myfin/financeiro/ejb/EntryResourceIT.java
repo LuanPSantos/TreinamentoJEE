@@ -1,14 +1,7 @@
 package com.luan.myfin.financeiro.ejb;
 
-import com.luan.myfin.base.enums.EntryType;
-import com.luan.myfin.base.interfaces.EntryService;
-import com.luan.myfin.base.models.Entry;
-import com.luan.myfin.ejb.daos.DatabaseInitializer;
-import com.luan.myfin.ejb.daos.EntryDAO;
-import com.luan.myfin.ejb.services.EntryServiceBean;
-import com.luan.myfin.web.resources.App;
-import com.luan.myfin.web.resources.EntryResource;
-import java.io.File;
+import com.luan.myfin.financeiro.base.enums.EntryType;
+import com.luan.myfin.financeiro.base.models.Entry;
 import java.sql.Date;
 import java.util.List;
 import javax.ws.rs.client.Client;
@@ -18,67 +11,18 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.Archive;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
-public class EntryServiceTest {
+public class EntryResourceIT {
 
     Client client;
     WebTarget target;
-
-    @Deployment
-    public static Archive createDeployment() {
-        WebArchive archive = ShrinkWrap.create(WebArchive.class, "IntegrationTest.war");
-        //Carrega as dependecias do maven para serem usadas nos testes
-        File[] files = Maven
-                .resolver()
-                .loadPomFromFile("pom.xml")
-                .importRuntimeDependencies()
-                .resolve()
-                .withTransitivity()
-                .asFile();
-
-        //adiciona as classes que serão deployadas
-        archive.addClasses(
-                EntryType.class,
-                EntryService.class,
-                Entry.class,
-                DatabaseInitializer.class,
-                EntryDAO.class,
-                EntryServiceBean.class,
-                App.class,
-                EntryResource.class,
-                EntryServiceTest.class
-        );
-
-        //adiciona o modolo do database
-        archive.addAsResource("modules/com/h2database/h2/main/module.xml");
-
-        //adiciona a configuração do datasource
-        archive.addAsResource("project-defaults.yml");
-
-        //cria o arquivo de bean para que o CDI funcione
-        archive.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
-
-        //adiciona as dependencias do maven
-        archive.addAsLibraries(files);
-
-        System.out.println("\n\n");
-        System.out.println(archive.toString(true));
-        System.out.println("\n\n");
-        return archive;
-    }
 
     @Before
     public void before() {
@@ -104,9 +48,8 @@ public class EntryServiceTest {
             assertEquals(30, entries.size());
             assertEquals("Teste 1", entries.get(0).getDescription());
             assertEquals(120.0d, entries.get(0).getValue(), 0.0001);
-            assertEquals(new Date(1509494400000l), entries.get(0).getDate());
+            assertEquals(new Date(1509494400000L), entries.get(0).getDate());
         } catch (Exception e) {
-            e.printStackTrace();
             fail();
         }
     }
@@ -131,8 +74,8 @@ public class EntryServiceTest {
             String location = reponse.getHeaderString("Location");
             assertEquals(201, reponse.getStatus());
             assertTrue(location.contains("entry/31"));
+            assertEquals(EntryType.ALIMENTACAO, entry.getType());
         } catch (Exception e) {
-            e.printStackTrace();
             fail();
         }
     }
@@ -144,18 +87,19 @@ public class EntryServiceTest {
             List<Entry> entries = target
                     .queryParam("description", " 4")
                     .request()
-                    .get(new GenericType<List<Entry>>() {});
+                    .get(new GenericType<List<Entry>>() {
+                    });
 
             assertEquals(1, entries.size());
             assertEquals("Teste 4", entries.get(0).getDescription());
             assertEquals(200.0d, entries.get(0).getValue(), 0.0001);
-            assertEquals(new Date(1509753600000l), entries.get(0).getDate());
+            assertEquals(new Date(1509753600000L), entries.get(0).getDate());
+            assertEquals(EntryType.MORADIA, entries.get(0).getType());
         } catch (Exception e) {
-            e.printStackTrace();
             fail();
         }
     }
-    
+
     @Test
     @RunAsClient
     public void it_should_filters_by_type() {
@@ -163,14 +107,86 @@ public class EntryServiceTest {
             List<Entry> entries = target
                     .queryParam("type", "SAUDE")
                     .request()
-                    .get(new GenericType<List<Entry>>() {});
+                    .get(new GenericType<List<Entry>>() {
+                    });
 
             assertEquals(3, entries.size());
             assertEquals("Teste 11", entries.get(0).getDescription());
             assertEquals(500.0d, entries.get(0).getValue(), 0.0001);
-            assertEquals(new Date(1510358400000l), entries.get(0).getDate());
+            assertEquals(new Date(1510358400000L), entries.get(0).getDate());
+            assertEquals(EntryType.SAUDE, entries.get(0).getType());
         } catch (Exception e) {
-            e.printStackTrace();
+            fail();
+        }
+    }
+
+    @Test
+    @RunAsClient
+    public void it_should_gets_entrys_until_the_final_period() {
+        try {
+            List<Entry> entries = target
+                    .queryParam("finalPeriod", "2017-11-10")
+                    .request()
+                    .get(new GenericType<List<Entry>>() {
+                    });
+
+            assertEquals(10, entries.size());
+            assertEquals("Teste 10", entries.get(9).getDescription());
+            assertEquals(500.0d, entries.get(9).getValue(), 0.0001);
+            assertEquals(new Date(1510272000000L), entries.get(9).getDate());
+            assertEquals(EntryType.LAZER, entries.get(9).getType());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    @RunAsClient
+    public void it_should_gets_entrys_starting_from_the_initial_period() {
+        try {
+            List<Entry> entries = target
+                    .queryParam("initialPeriod", "2017-11-10")
+                    .request()
+                    .get(new GenericType<List<Entry>>() {
+                    });
+
+            assertEquals(21, entries.size());
+            assertEquals("Teste 10", entries.get(0).getDescription());
+            assertEquals(500.0d, entries.get(0).getValue(), 0.0001);
+            assertEquals(new Date(1510272000000L), entries.get(0).getDate());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    @RunAsClient
+    public void it_should_delete_an_entry_by_id() {
+        try {
+            Response response = target
+                    .path("21")
+                    .request()
+                    .delete();
+
+            assertEquals(200, response.getStatus());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    @RunAsClient
+    public void it_should_gets_an_entry_by_id() {
+        try {
+            Entry entry = target
+                    .path("1")
+                    .request()
+                    .get(Entry.class);
+
+            assertEquals("Teste 1", entry.getDescription());
+            assertEquals(120.0d, entry.getValue(), 0.0001);
+            assertEquals(new Date(1509494400000L), entry.getDate());
+        } catch (Exception e) {
             fail();
         }
     }

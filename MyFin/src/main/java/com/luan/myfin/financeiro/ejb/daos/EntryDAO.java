@@ -62,6 +62,77 @@ public class EntryDAO {
         return entry;
     }
 
+    public void deleteEntry(Long id) {
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            String sql = "DELETE FROM Entry WHERE entry_id = ?";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setLong(1, id);
+
+            statement.execute();
+            statement.close();
+        } catch (SQLException e) {
+            System.err.println("Erro com banco de dados");
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.err.println("Erro ao fechar conexão");
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public Entry selectEntryById(Long id) {
+        Entry entry = null;
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            String sql = "SELECT * FROM Entry WHERE entry_id = ?";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setLong(1, id);
+
+            statement.execute();
+
+            ResultSet resultSet = statement.getResultSet();
+
+            if (resultSet.next()) {
+                entry = new Entry();
+
+                entry.setId(resultSet.getLong("entry_id"));
+                entry.setDescription(resultSet.getString("entry_description"));
+                entry.setDate(resultSet.getDate("entry_date"));
+                entry.setValue(resultSet.getDouble("entry_value"));
+                entry.setType(EntryType.valueOf(resultSet.getInt("entry_type_id")));
+
+            }
+
+            statement.close();
+        } catch (SQLException e) {
+            System.err.println("Erro com banco de dados");
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.err.println("Erro ao fechar conexão");
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+        return entry;
+    }
+
     public List<Entry> selectEntries(EntryType type, Date initialPeriod, Date finalPeriod, String description) {
         Connection connection = null;
         try {

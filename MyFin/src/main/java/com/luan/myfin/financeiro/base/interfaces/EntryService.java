@@ -10,4 +10,8 @@ public interface EntryService {
     public Entry insertEntry(Entry entry);
 
     public List<Entry> selectEntries(EntryType type, Date initialPeriod, Date finalPeriod, String description);
+
+    public void deleteEntry(Long id);
+
+    public Entry selectEntryById(Long id);
 }
