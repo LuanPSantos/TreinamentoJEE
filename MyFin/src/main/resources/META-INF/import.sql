@@ -26,7 +26,6 @@ insert into EntryType(type_value) values
     ('OUTROS');
 
 insert into Entry(entry_description, entry_date, entry_value, entry_type_id) values
-    -- ('Teste', PARSEDATETIME('2017-11-23','yyyy-MM-dd'), 100.0, 1),
     ('Teste 1',PARSEDATETIME('2017-11-01','yyyy-MM-dd'), 120.0, 1),
     ('Teste 2',PARSEDATETIME('2017-11-02','yyyy-MM-dd'), 140.0, 2),
     ('Teste 3',PARSEDATETIME('2017-11-03','yyyy-MM-dd'), 5.41, 1),
