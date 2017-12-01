@@ -11,6 +11,7 @@ Esta funcionalidade permite ao **Usuário** o lançamento de contas de despesas 
 - Data
 - Descrição
 - Valor
+- Tipo
 
 As contas são organizadas por tipo de lançamento.
 
@@ -18,8 +19,6 @@ As contas são organizadas por tipo de lançamento.
 
 | Funcionalidade                                                                                     | Descrição                                      |
 |----------------------------------------------------------------------------------------------------|------------------------------------------------|
-| [FU-Consulta Lançamentos](../FU-Consulta-Lancamentos/FU-Consulta-Lancamentos.md)                      | Consulta de Lançamento de Contas Mensais       |
-| [FU-Conta Corrente](../FU-Conta-Corrente/FU-Conta-Corrente.md)                                        | Atualização de Totais de Conta Corrente        |
 | [FU-Log Rastreamento Contas](../FU-Log-Rastreamento-Contas/FU-Log-Rastreamento-Contas.md)             | Log Rastreamento Lançamentos em Conta Corrente |
 | [FU-Notificação Novo Lançamento](../FU-Notificacao-Novo-Lancamento/FU-Notificacao-Novo-Lancamento.md) | Notificacao Web Browser de Novo Lançamento     |
 
