@@ -44,4 +44,9 @@ public class EntryServiceBean implements EntryService {
         return dao.selectEntryById(id);
     }
 
+    @Override
+    public Entry updateEntry(Entry entry) {
+        return dao.updateEntry(entry);
+    }
+
 }

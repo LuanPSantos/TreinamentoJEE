@@ -3,10 +3,12 @@ package com.luan.myfin;
 import com.luan.myfin.financeiro.base.enums.EntryType;
 import com.luan.myfin.financeiro.base.interfaces.EntryService;
 import com.luan.myfin.financeiro.base.models.Entry;
+import com.luan.myfin.financeiro.base.models.ViolationException;
 import com.luan.myfin.financeiro.ejb.EntryResourceIntegrationTest;
 import com.luan.myfin.financeiro.ejb.daos.DatabaseInitializer;
 import com.luan.myfin.financeiro.ejb.daos.EntryDAO;
 import com.luan.myfin.financeiro.ejb.services.EntryServiceBean;
+import com.luan.myfin.financeiro.web.exceptions.ViolationExceptionMapper;
 import com.luan.myfin.financeiro.web.resources.App;
 import com.luan.myfin.financeiro.web.resources.EntryResource;
 import java.io.File;
@@ -44,7 +46,9 @@ public class ArquillianInitializerIT {
                 App.class,
                 EntryResource.class,
                 EntryResourceIntegrationTest.class,
-                ArquillianInitializerIT.class
+                ArquillianInitializerIT.class,
+                ViolationException.class,
+                ViolationExceptionMapper.class
         );
 
         //adiciona o modolo do database

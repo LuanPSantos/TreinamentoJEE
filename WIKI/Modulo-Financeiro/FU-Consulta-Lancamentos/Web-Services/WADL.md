@@ -2,7 +2,7 @@
 ![Cabecalho](../../../ReadMe-Anexos/Cabecalho.png)
 
 
-[Home](../../../ReadMe.md) :: [Módulo Financeiro](../../Modulo-Financeiro.md) :: [FU-Consulta Lançamentos](../FU-Consulta-Lancamentos/FU-Consulta-Lancamentos.md) :: [WSDL](WSDL.md)
+[Home](../../../ReadMe.md) :: [Módulo Financeiro](../../Modulo-Financeiro.md) :: [FU-Consulta Lançamentos](../FU-Consulta-Lancamentos/FU-Consulta-Lancamentos.md) :: [WADL](WADL.md)
 
 
 # WSDL da Funcionalidade: Consulta Lançamentos

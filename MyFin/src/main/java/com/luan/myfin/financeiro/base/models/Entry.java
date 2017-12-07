@@ -4,6 +4,7 @@ import com.luan.myfin.financeiro.base.enums.EntryType;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
@@ -11,9 +12,17 @@ import javax.xml.bind.annotation.XmlAccessorType;
 public class Entry implements Serializable {
 
     private Long id;
+    
+    @NotNull(message = "A descrição não pode ser nula.")
     private String description;
+    
+    @NotNull(message = "A data não pode ser nula.")
     private Date date;
+    
+    @NotNull(message = "O valor não pode ser nulo.")
     private Double value;
+    
+    @NotNull(message = "O tipo não pode ser nulo.")
     private EntryType type;
 
     public Double getValue() {

@@ -16,7 +16,7 @@ Alteração de lançamentos de conta mensal.
 
 | Atributo                          | Obrigatório | Observações                          |
 |-----------------------------------|:-----------:|--------------------------------------|
-| Nome do Atributo (case sensitive) |     S/N     | Descrição do campo e valores válidos |
+| Content-Type |     S     | Informa o formado do objeto enviado na requisição |
 
 
 ## Atributos do Serviço
@@ -25,7 +25,10 @@ Alteração de lançamentos de conta mensal.
 
 | Atributo                          | Obrigatório | Observações                          |
 |-----------------------------------|:-----------:|--------------------------------------|
-| Nome do Atributo (case sensitive) |     S/N     | Descrição do campo e valores válidos |
+| description |    S     | Informa a descrição de um Lançamento (Cadeia de caracteres) |
+| type |     S     | Tipo do Lançamento [EntryType](../Regras-de-Negocios/RN-Tipo-de-Lancamento.md) |
+| date |     S     | Data do Lançamento (yyyy-MM-dd) |
+| value |     S     | Valor do Lançamento (Double)|
 
 
 ## Demais Validações

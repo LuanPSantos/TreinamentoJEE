@@ -129,7 +129,7 @@ public class EntryDAO {
                 }
             }
         }
-        
+
         return entry;
     }
 
@@ -240,5 +240,39 @@ public class EntryDAO {
         }
 
         return null;
+    }
+
+    public Entry updateEntry(Entry entry) {
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            String sql = "UPDATE Entry SET entry_description = ?, entry_date = ?, entry_value = ?, entry_type_id = ? WHERE entry_id = ?";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, entry.getDescription());
+            statement.setDate(2, entry.getDate());
+            statement.setDouble(3, entry.getValue());
+            statement.setInt(4, entry.getType().getId());
+            statement.setLong(5, entry.getId());
+
+            statement.execute();
+
+            statement.close();
+        } catch (SQLException e) {
+            System.err.println("Erro com banco de dados");
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.err.println("Erro ao fechar conexão");
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return entry;
     }
 }

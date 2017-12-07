@@ -14,4 +14,6 @@ public interface EntryService {
     public void deleteEntry(Long id);
 
     public Entry selectEntryById(Long id);
+    
+    public Entry updateEntry(Entry entry);
 }
