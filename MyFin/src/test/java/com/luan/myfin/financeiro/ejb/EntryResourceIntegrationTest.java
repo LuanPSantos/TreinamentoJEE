@@ -4,6 +4,8 @@ import com.luan.myfin.ArquillianInitializerIT;
 import com.luan.myfin.financeiro.base.enums.EntryType;
 import com.luan.myfin.financeiro.base.models.Entry;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.client.Client;
@@ -100,7 +102,12 @@ public class EntryResourceIntegrationTest extends ArquillianInitializerIT {
             String location = response.getHeaderString("Location");
             assertEquals(201, response.getStatus());
             assertTrue(location.contains("entry/31"));
-            assertEquals(EntryType.ALIMENTACAO, entry.getType());
+            
+            Entry newEntry = response.readEntity(Entry.class);
+            assertEquals(EntryType.ALIMENTACAO, newEntry.getType());
+            assertEquals("Big lanção", newEntry.getDescription());
+            assertEquals(50.0d, newEntry.getValue(), 0.000001);
+            //assertEquals(new Date(1509494400000l), newEntry.getDate());
         } catch (Exception e) {
             fail(e.getMessage());
         }

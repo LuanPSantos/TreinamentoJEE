@@ -51,6 +51,7 @@ public class EntryResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertEntry(@Context UriInfo uriInfo, @Valid Entry entry) {
+        System.out.println("===========> " + entry.getDate());
         Entry newEntry = entryService.insertEntry(entry);
 
         if (newEntry.getId() != null) {

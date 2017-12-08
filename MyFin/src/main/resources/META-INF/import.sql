@@ -57,5 +57,16 @@ insert into Entry(entry_description, entry_date, entry_value, entry_type_id) val
     ('Teste 29',PARSEDATETIME('2017-11-21','yyyy-MM-dd'), 134.0, 4),
     ('Teste 30',PARSEDATETIME('2017-11-21','yyyy-MM-dd'), 123.0, 4);
 
+create table Account(
+    account_date date not null,
+    account_value double not null default 0,
+
+    primary key(account_date)
+);
+
+insert into Account (account_date, account_value) values
+    (PARSEDATETIME('2017-11-01','yyyy-MM-dd'), 0),
+    (PARSEDATETIME('2017-10-01','yyyy-MM-dd'), 0);
+
 -- select * from Entry e inner join EntryType t where e.entry_type_id = t.type_id;
 --SELECT * FROM Entry WHERE 1 = 1 AND entry_date BETWEEN '2017-11-10' AND '2017-11-23';

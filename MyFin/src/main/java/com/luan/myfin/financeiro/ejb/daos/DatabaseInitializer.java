@@ -78,6 +78,16 @@ public class DatabaseInitializer {
                     + "    ('Teste 29',PARSEDATETIME('2017-11-21','yyyy-MM-dd'), 134.0, 4),"
                     + "    ('Teste 30',PARSEDATETIME('2017-11-21','yyyy-MM-dd'), 123.0, 4);";
 
+            String createTableAccount = "create table Account("
+                    + "    account_date date not null,"
+                    + "    account_value double not null default 0,"
+                    + "    primary key(account_date)\n"
+                    + ");";
+            
+            String insertIntoAccount = "insert into Account (account_date, account_value) values"
+                    + "    (PARSEDATETIME('2017-11-01','yyyy-MM-dd'), 0),"
+                    + "    (PARSEDATETIME('2017-10-01','yyyy-MM-dd'), 0);";
+
             PreparedStatement statement = connection.prepareStatement(createTableEntryType);
             statement.execute();
             System.out.println("Criando EntryType");
@@ -85,6 +95,10 @@ public class DatabaseInitializer {
             statement = connection.prepareStatement(createTableEntry);
             statement.execute();
             System.out.println("Criando Entry");
+            
+            statement = connection.prepareStatement(createTableAccount);
+            statement.execute();
+            System.out.println("Criando Account");
 
             statement = connection.prepareStatement(insertIntoEntryType);
             statement.execute();
@@ -94,6 +108,10 @@ public class DatabaseInitializer {
             statement.execute();
             System.out.println("Populando Entry");
 
+            statement = connection.prepareStatement(insertIntoAccount);
+            statement.execute();
+            System.out.println("Populando Account");
+            
             statement.close();
         } catch (SQLException e) {
             System.err.println("Erro com banco de dados");

@@ -27,12 +27,17 @@ public class EntryDAO {
         try {
             connection = dataSource.getConnection();
             String sql = "INSERT INTO Entry (entry_description, entry_date, entry_value, entry_type_id) values (?, ?, ?, ?)";
+            System.out.println("String SQL ==> " + sql);
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
+            System.out.println("\t1 : " + entry.getDescription());
             statement.setString(1, entry.getDescription());
+            System.out.println("\t2 : " + entry.getDate());
             statement.setDate(2, entry.getDate());
+            System.out.println("\t3 : " + entry.getValue());
             statement.setDouble(3, entry.getValue());
+            System.out.println("\t4 : " + entry.getType());
             statement.setInt(4, entry.getType().getId());
 
             statement.execute();
