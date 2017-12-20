@@ -1,6 +1,5 @@
 package com.luan.myfin.financeiro.base.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.luan.myfin.financeiro.base.enums.EntryType;
 import java.io.Serializable;
 import java.sql.Date;

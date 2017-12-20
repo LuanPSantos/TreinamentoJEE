@@ -39,13 +39,24 @@ public class AccountServiceBean implements AccountService {
             return accountDAO.insertAccount(account);
         } else {
             account.setValue(total);
-            return accountDAO.updateAccount(account);
+            accountDAO.updateAccount(account);
         }
+        
+        return null;
     }
 
     @Override
     public Account selectCurrentAccount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Account account = accountDAO.selectAccount(fistDayOfCurrentMonth());
+
+        if (account == null) {
+            account = new Account();
+            account.setDate(fistDayOfCurrentMonth());
+            account.setValue(0d);
+            return accountDAO.insertAccount(account);
+        } else {
+            return account;
+        }
     }
 
     private Date fistDayOfCurrentMonth() {

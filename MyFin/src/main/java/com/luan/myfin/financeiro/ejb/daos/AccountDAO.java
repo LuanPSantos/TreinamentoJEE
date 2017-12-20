@@ -18,7 +18,7 @@ public class AccountDAO {
     @Resource(lookup = "java:jboss/datasources/MyFinDS")
     private DataSource dataSource;
 
-    public Account updateAccount(Account account) {
+    public void updateAccount(Account account) {
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
@@ -29,7 +29,7 @@ public class AccountDAO {
 
             System.out.println("\t1 : " + account.getValue().toString());
             statement.setDouble(1, account.getValue());
-            
+
             System.out.println("\t2 : " + account.getDate().toString());
             statement.setDate(2, account.getDate());
 
@@ -49,7 +49,6 @@ public class AccountDAO {
                 }
             }
         }
-        return null;
     }
 
     public Account insertAccount(Account account) {
@@ -63,7 +62,7 @@ public class AccountDAO {
 
             System.out.println("\t1 : " + account.getValue().toString());
             statement.setDouble(1, account.getValue());
-            
+
             System.out.println("\t2 : " + account.getDate().toString());
             statement.setDate(2, account.getDate());
 
@@ -93,7 +92,7 @@ public class AccountDAO {
         try {
             connection = dataSource.getConnection();
             String sql = "SELECT * FROM Account WHERE account_date = ?";
-            
+
             System.out.println("String SQL ==> " + sql);
             PreparedStatement statement = connection.prepareStatement(sql);
 
