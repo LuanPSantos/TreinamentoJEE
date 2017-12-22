@@ -4,6 +4,8 @@ import com.luan.myfin.financeiro.base.enums.EntryType;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -20,6 +22,8 @@ public class Entry implements Serializable {
     private Date date;
 
     @NotNull(message = "O valor não pode ser nulo.")
+    @Min(value = 0, message = "Não é possível inserir um lançamento negativo.")
+    @Max(value = 10000000000l, message = "Não é possível inserir um lançamento negativo.")
     private Double value;
 
     @NotNull(message = "O tipo não pode ser nulo.")

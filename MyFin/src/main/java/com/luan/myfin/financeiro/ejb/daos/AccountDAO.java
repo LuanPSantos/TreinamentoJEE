@@ -2,7 +2,8 @@ package com.luan.myfin.financeiro.ejb.daos;
 
 import com.luan.myfin.financeiro.base.enums.EntryType;
 import com.luan.myfin.financeiro.base.models.Account;
-import com.luan.myfin.financeiro.base.models.Entry;
+import com.luan.myfin.financeiro.base.models.EntryConsolidated;
+import com.luan.myfin.financeiro.base.util.DateUtils;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -22,17 +23,22 @@ public class AccountDAO {
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
-            String sql = "UPDATE Account SET account_value = ? WHERE account_date = ?";
+            String sql = "UPDATE Account_EntryType ae "
+                    + "    SET total = (SELECT SUM(entry_value) FROM Entry WHERE entry_date >= ? AND entry_date <= ? and entry_type_id = ae.type_id ) "
+                    + "    WHERE ae.account_date = ?";
 
             System.out.println("String SQL ==> " + sql);
             PreparedStatement statement = connection.prepareStatement(sql);
 
-            System.out.println("\t1 : " + account.getValue().toString());
-            statement.setDouble(1, account.getValue());
+            //Já é o primeiro dia do mes
+            System.out.println("\t1 : " + account.getDate().toString());
+            statement.setDate(1, account.getDate());
 
-            System.out.println("\t2 : " + account.getDate().toString());
-            statement.setDate(2, account.getDate());
+            System.out.println("\t2 : " + DateUtils.lastDayOfMonth(account.getDate()).toString());
+            statement.setDate(2, DateUtils.lastDayOfMonth(account.getDate()));
 
+            System.out.println("\t3 : " + account.getDate().toString());
+            statement.setDate(3, account.getDate());
             statement.execute();
 
             statement.close();
@@ -55,17 +61,13 @@ public class AccountDAO {
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
-            String sql = "INSERT INTO Account (account_value, account_date) values (?, ?)";
+            String sql = "INSERT INTO Account (account_date) values (?)";
 
             System.out.println("String SQL ==> " + sql);
             PreparedStatement statement = connection.prepareStatement(sql);
 
-            System.out.println("\t1 : " + account.getValue().toString());
-            statement.setDouble(1, account.getValue());
-
-            System.out.println("\t2 : " + account.getDate().toString());
-            statement.setDate(2, account.getDate());
-
+            System.out.println("\t1 : " + account.getDate().toString());
+            statement.setDate(1, account.getDate());
             statement.execute();
 
             statement.close();
@@ -91,10 +93,18 @@ public class AccountDAO {
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
-            String sql = "SELECT * FROM Account WHERE account_date = ?";
+            StringBuilder sql = new StringBuilder();
+            sql.append("SELECT ");
+            sql.append("a.account_date as date, ");
+            sql.append("e.type_id as idType, ");
+            sql.append("ae.total as total ");
+            sql.append("FROM Account a ");
+            sql.append("INNER JOIN Account_EntryType ae ON a.account_date = ae.account_date ");
+            sql.append("INNER JOIN EntryType e on e.type_id = ae.type_id ");
+            sql.append("WHERE a.account_date = ? ");
 
             System.out.println("String SQL ==> " + sql);
-            PreparedStatement statement = connection.prepareStatement(sql);
+            PreparedStatement statement = connection.prepareStatement(sql.toString());
 
             System.out.println("\t1 : " + date.toString());
             statement.setDate(1, date);
@@ -103,12 +113,17 @@ public class AccountDAO {
 
             ResultSet resultSet = statement.getResultSet();
 
-            if (resultSet.next()) {
-                account = new Account();
+            while (resultSet.next()) {
+                if (account == null) {
+                    account = new Account();
+                    account.setDate(resultSet.getDate("date"));
+                }
 
-                account.setDate(resultSet.getDate("account_date"));
-                account.setValue(resultSet.getDouble("account_value"));
+                EntryConsolidated entryConsolidated = new EntryConsolidated();
+                entryConsolidated.setType(EntryType.valueOf(resultSet.getInt("idType")));
+                entryConsolidated.setTotal(resultSet.getDouble("total"));
 
+                account.addEntryConsolidated(entryConsolidated);
             }
 
             statement.close();

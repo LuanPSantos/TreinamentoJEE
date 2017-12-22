@@ -2,15 +2,20 @@ package com.luan.myfin.financeiro.base.models;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Account implements Serializable {
 
-    //ID
     private Date date;
-    private Double value;
+    private List<EntryConsolidated> entries;
+
+    public Account() {
+        entries = new ArrayList<>();
+    }
 
     public Date getDate() {
         return date;
@@ -20,11 +25,16 @@ public class Account implements Serializable {
         this.date = date;
     }
 
-    public Double getValue() {
-        return value;
+    public List<EntryConsolidated> getEntries() {
+        return entries;
     }
 
-    public void setValue(Double value) {
-        this.value = value;
+    public void setEntries(List<EntryConsolidated> entries) {
+        this.entries = entries;
     }
+
+    public void addEntryConsolidated(EntryConsolidated entryConsolidated) {
+        entries.add(entryConsolidated);
+    }
+
 }

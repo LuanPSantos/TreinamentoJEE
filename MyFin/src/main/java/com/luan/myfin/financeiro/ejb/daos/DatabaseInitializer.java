@@ -76,17 +76,53 @@ public class DatabaseInitializer {
                     + "    ('Teste 27',PARSEDATETIME('2017-11-21','yyyy-MM-dd'), 168.0, 1),"
                     + "    ('Teste 28',PARSEDATETIME('2017-11-21','yyyy-MM-dd'), 145.0, 2),"
                     + "    ('Teste 29',PARSEDATETIME('2017-11-21','yyyy-MM-dd'), 134.0, 4),"
-                    + "    ('Teste 30',PARSEDATETIME('2017-11-21','yyyy-MM-dd'), 123.0, 4);";
+                    + "    ('Teste 30',PARSEDATETIME('2017-11-21','yyyy-MM-dd'), 123.0, 4),"
+                    + "    ('Teste 31',PARSEDATETIME('2017-12-15','yyyy-MM-dd'), 160.0, 1),"
+                    + "    ('Teste 32',PARSEDATETIME('2017-12-15','yyyy-MM-dd'), 103.0, 5),"
+                    + "    ('Teste 33',PARSEDATETIME('2017-12-15','yyyy-MM-dd'), 102.0, 1),"
+                    + "    ('Teste 34',PARSEDATETIME('2017-12-15','yyyy-MM-dd'), 101.0, 5),"
+                    + "    ('Teste 35',PARSEDATETIME('2017-12-15','yyyy-MM-dd'), 101.0, 4),"
+                    + "    ('Teste 36',PARSEDATETIME('2017-12-16','yyyy-MM-dd'), 102.0, 1),"
+                    + "    ('Teste 37',PARSEDATETIME('2017-12-17','yyyy-MM-dd'), 104.0, 3),"
+                    + "    ('Teste 38',PARSEDATETIME('2017-12-17','yyyy-MM-dd'), 107.0, 3),"
+                    + "    ('Teste 39',PARSEDATETIME('2017-12-18','yyyy-MM-dd'), 108.0, 6),"
+                    + "    ('Teste 40',PARSEDATETIME('2017-12-19','yyyy-MM-dd'), 112.0, 6),"
+                    + "    ('Teste 41',PARSEDATETIME('2017-12-20','yyyy-MM-dd'), 123.0, 4),"
+                    + "    ('Teste 42',PARSEDATETIME('2017-12-21','yyyy-MM-dd'), 156.0, 2),"
+                    + "    ('Teste 43',PARSEDATETIME('2017-12-21','yyyy-MM-dd'), 168.0, 1),"
+                    + "    ('Teste 44',PARSEDATETIME('2017-12-21','yyyy-MM-dd'), 145.0, 2),"
+                    + "    ('Teste 45',PARSEDATETIME('2017-12-21','yyyy-MM-dd'), 134.0, 4),"
+                    + "    ('Teste 46',PARSEDATETIME('2017-12-21','yyyy-MM-dd'), 123.0, 4);";
 
             String createTableAccount = "create table Account("
                     + "    account_date date not null,"
-                    + "    account_value double not null default 0,"
-                    + "    primary key(account_date)\n"
+                    + "    primary key(account_date)"
                     + ");";
-            
-            String insertIntoAccount = "insert into Account (account_date, account_value) values"
-                    + "    (PARSEDATETIME('2017-11-01','yyyy-MM-dd'), 0),"
-                    + "    (PARSEDATETIME('2017-10-01','yyyy-MM-dd'), 0);";
+
+            String createTableAccountEntryType = "create table Account_EntryType("
+                    + "    account_date date not null,"
+                    + "    type_id int not null,"
+                    + "    total double not null,"
+                    + "    primary key (account_date, type_id),"
+                    + "    constraint account_date_account_entrytype foreign key (account_date) references Account(account_date),"
+                    + "    constraint type_id_account_entrytype foreign key (type_id) references EntryType(type_id)"
+                    + ");";
+
+            String insertIntoAccount = "insert into Account (account_date) values"
+                    + "    ('2017-11-01'),"
+                    + "    ('2017-12-01');";
+
+            String insertIntoTableAccountEntryType = "insert into Account_EntryType(account_date, type_id, total) values\n"
+                    + "    ('2017-12-01', 4, (SELECT sum(entry_value) FROM Entry WHERE entry_date >= PARSEDATETIME('2017-12-01','yyyy-MM-dd') AND entry_date <= PARSEDATETIME('2017-12-31','yyyy-MM-dd') and entry_type_id = 4 ) ),"
+                    + "    ('2017-12-01', 2, (SELECT sum(entry_value) FROM Entry WHERE entry_date >= PARSEDATETIME('2017-12-01','yyyy-MM-dd') AND entry_date <= PARSEDATETIME('2017-12-31','yyyy-MM-dd') and entry_type_id = 2  ) ),"
+                    + "    ('2017-12-01', 1, (SELECT sum(entry_value) FROM Entry WHERE entry_date >= PARSEDATETIME('2017-12-01','yyyy-MM-dd') AND entry_date <= PARSEDATETIME('2017-12-31','yyyy-MM-dd') and entry_type_id = 1 ) ),"
+                    + "    ('2017-12-01', 3, (SELECT sum(entry_value) FROM Entry WHERE entry_date >= PARSEDATETIME('2017-12-01','yyyy-MM-dd') AND entry_date <= PARSEDATETIME('2017-12-31','yyyy-MM-dd') and entry_type_id = 3) ),"
+                    + "    ('2017-12-01', 6, (SELECT sum(entry_value) FROM Entry WHERE entry_date >= PARSEDATETIME('2017-12-01','yyyy-MM-dd') AND entry_date <= PARSEDATETIME('2017-12-31','yyyy-MM-dd') and entry_type_id = 6) ),"
+                    + "    ('2017-12-01', 5, (SELECT sum(entry_value) FROM Entry WHERE entry_date >= PARSEDATETIME('2017-12-01','yyyy-MM-dd') AND entry_date <= PARSEDATETIME('2017-12-31','yyyy-MM-dd') and entry_type_id = 5) ),"
+                    + "    ('2017-11-01', 1, (SELECT sum(entry_value) FROM Entry WHERE entry_date >= PARSEDATETIME('2017-11-01','yyyy-MM-dd') AND entry_date <= PARSEDATETIME('2017-11-31','yyyy-MM-dd') and entry_type_id = 1) ),"
+                    + "    ('2017-11-01', 2, (SELECT sum(entry_value) FROM Entry WHERE entry_date >= PARSEDATETIME('2017-11-01','yyyy-MM-dd') AND entry_date <= PARSEDATETIME('2017-11-31','yyyy-MM-dd') and entry_type_id = 2) ),"
+                    + "    ('2017-11-01', 3, (SELECT sum(entry_value) FROM Entry WHERE entry_date >= PARSEDATETIME('2017-11-01','yyyy-MM-dd') AND entry_date <= PARSEDATETIME('2017-11-31','yyyy-MM-dd') and entry_type_id = 3) ),"
+                    + "    ('2017-11-01', 6, (SELECT sum(entry_value) FROM Entry WHERE entry_date >= PARSEDATETIME('2017-11-01','yyyy-MM-dd') AND entry_date <= PARSEDATETIME('2017-11-31','yyyy-MM-dd') and entry_type_id = 6) );";
 
             PreparedStatement statement = connection.prepareStatement(createTableEntryType);
             statement.execute();
@@ -95,10 +131,14 @@ public class DatabaseInitializer {
             statement = connection.prepareStatement(createTableEntry);
             statement.execute();
             System.out.println("Criando Entry");
-            
+
             statement = connection.prepareStatement(createTableAccount);
             statement.execute();
             System.out.println("Criando Account");
+
+            statement = connection.prepareStatement(createTableAccountEntryType);
+            statement.execute();
+            System.out.println("Criando Account_EntryType");
 
             statement = connection.prepareStatement(insertIntoEntryType);
             statement.execute();
@@ -111,7 +151,11 @@ public class DatabaseInitializer {
             statement = connection.prepareStatement(insertIntoAccount);
             statement.execute();
             System.out.println("Populando Account");
-            
+
+            statement = connection.prepareStatement(insertIntoTableAccountEntryType);
+            statement.execute();
+            System.out.println("Populando Account_EntryType");
+
             statement.close();
         } catch (SQLException e) {
             System.err.println("Erro com banco de dados");

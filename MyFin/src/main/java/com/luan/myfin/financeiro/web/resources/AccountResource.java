@@ -24,8 +24,8 @@ public class AccountResource {
 
         if (account != null) {
             return Response.ok(account).build();
-        }else{
-            return Response.noContent().build();
+        } else {
+            return Response.notModified().build();
         }
     }
 
@@ -36,7 +36,7 @@ public class AccountResource {
 
         if (account != null) {
             return Response.ok(account).build();
-        }else{
+        } else {
             return Response.noContent().build();
         }
     }
