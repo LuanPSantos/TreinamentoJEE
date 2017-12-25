@@ -10,6 +10,7 @@
 | Procedimento                                                                     | Descrição                                 |
 |----------------------------------------------------------------------------------|-------------------------------------------|
 | [Intruções Trilha JEE-SQL](Intrucoes-Trilha-JEE-SQL/Intrucoes-Trilha-JEE-SQL.md) | Instruções para realização dos exercícios |
+| [Manual de implantação](Manual-de-implantação/Manual-de-implantacao.md) | Instruções para realização dos exercícios |
 
 _[Sobre o Portal de Documentação](../About/About.md)_
 

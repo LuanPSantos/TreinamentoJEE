@@ -102,8 +102,6 @@
             <artifactId>resteasy-jackson-provider</artifactId>
             <version>3.0.19.Final</version>
         </dependency>
-
-
                     
         <!-- Brought in via WildFly Swarm `bom` - depencia do arquillian -->
         <dependency>
@@ -138,7 +136,7 @@
             <groupId>org.wildfly.swarm</groupId>
             <artifactId>datasources</artifactId>
         </dependency>
-        <!--<dependency>
+<!--        <dependency>
             <groupId>org.wildfly.swarm</groupId>
             <artifactId>jpa</artifactId>
         </dependency>-->
