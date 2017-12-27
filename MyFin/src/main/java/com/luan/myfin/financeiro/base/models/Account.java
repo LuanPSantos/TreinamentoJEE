@@ -4,13 +4,22 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
+@Entity
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Account implements Serializable {
 
+    @Id
+    @Column("account_date")
     private Date date;
+    
+    @Transient
     private List<EntryConsolidated> entries;
 
     public Account() {
