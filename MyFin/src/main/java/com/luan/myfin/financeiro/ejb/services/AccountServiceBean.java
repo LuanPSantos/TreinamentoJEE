@@ -44,7 +44,7 @@ public class AccountServiceBean implements AccountService {
 
     private Account insertAccount(Account account) {
         account = new Account();
-        account.setDate(DateUtils.fistDayOfCurrentMonth());
+        account.setAccountDate(DateUtils.fistDayOfCurrentMonth());
         return accountDAO.insertAccount(account);
     }
 }

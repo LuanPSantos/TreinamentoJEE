@@ -1,7 +1,6 @@
 package com.luan.myfin.financeiro.web.resources;
 
 import com.luan.myfin.financeiro.base.interfaces.EntryService;
-import com.luan.myfin.financeiro.base.enums.EntryType;
 import com.luan.myfin.financeiro.base.models.Entry;
 import java.net.URI;
 import java.sql.Date;
@@ -33,7 +32,7 @@ public class EntryResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response selectEntries(
             //TODO: Bean validation
-            @QueryParam("type") EntryType type,
+            @QueryParam("type") String type,
             @QueryParam("initialPeriod") Date initialPeriod,
             @QueryParam("finalPeriod") Date finalPeriod,
             @QueryParam("description") String description
@@ -51,7 +50,6 @@ public class EntryResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertEntry(@Context UriInfo uriInfo, @Valid Entry entry) {
-        System.out.println("===========> " + entry.getDate());
         Entry newEntry = entryService.insertEntry(entry);
 
         if (newEntry.getId() != null) {

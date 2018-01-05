@@ -1,9 +1,12 @@
 package com.luan.myfin;
 
-import com.luan.myfin.financeiro.base.enums.EntryType;
 import com.luan.myfin.financeiro.base.interfaces.EntryService;
 import com.luan.myfin.financeiro.base.models.Entry;
+import com.luan.myfin.financeiro.base.models.EntryConsolidated;
+import com.luan.myfin.financeiro.base.models.EntryConsolidatedPK;
+import com.luan.myfin.financeiro.base.models.EntryType;
 import com.luan.myfin.financeiro.base.models.ViolationException;
+import com.luan.myfin.financeiro.base.util.DateUtils;
 import com.luan.myfin.financeiro.ejb.EntryResourceIntegrationTest;
 import com.luan.myfin.financeiro.ejb.daos.DatabaseInitializer;
 import com.luan.myfin.financeiro.ejb.daos.EntryDAO;
@@ -37,18 +40,22 @@ public class ArquillianInitializerIT {
                 .asFile();
 
         //adiciona as classes que serão deployadas
-        archive.addClasses(EntryType.class,
+        archive.addClasses(
                 EntryService.class,
                 Entry.class,
+                EntryConsolidated.class,
+                EntryConsolidatedPK.class,
+                EntryType.class,
+                ViolationException.class,
+                DateUtils.class,
                 DatabaseInitializer.class,
                 EntryDAO.class,
                 EntryServiceBean.class,
+                ViolationExceptionMapper.class,
                 App.class,
                 EntryResource.class,
-                EntryResourceIntegrationTest.class,
                 ArquillianInitializerIT.class,
-                ViolationException.class,
-                ViolationExceptionMapper.class
+                EntryResourceIntegrationTest.class
         );
 
         //adiciona o modolo do database
@@ -56,6 +63,9 @@ public class ArquillianInitializerIT {
 
         //adiciona a configuração do datasource
         archive.addAsResource("project-defaults.yml");
+        
+        //Adiciona o persistence.xml
+        archive.addAsResource("META-INF/persistence.xml");
 
         //cria o arquivo de bean para que o CDI funcione
         archive.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");

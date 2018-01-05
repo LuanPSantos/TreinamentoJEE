@@ -1,13 +1,13 @@
 package com.luan.myfin.financeiro.base.models;
 
-import com.luan.myfin.financeiro.base.enums.EntryType;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -19,34 +19,37 @@ import javax.xml.bind.annotation.XmlAccessorType;
 public class Entry implements Serializable {
 
     @Id
-    @Column("entry_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column("entry_description")
     @NotNull(message = "A descrição não pode ser nula.")
     private String description;
 
-    @Column("entry_date")
     @NotNull(message = "A data não pode ser nula.")
-    private Date date;
+    private Date entryDate;
 
-    @Column("entry_value")
     @NotNull(message = "O valor não pode ser nulo.")
     @Min(value = 0, message = "Não é possível inserir um lançamento negativo.")
     @Max(value = 10000000000l, message = "Não é possível inserir um lançamento negativo.")
-    private Double value;
+    private Double entryValue;
 
-    @Column("entry_type_id")
-    @Enumerated
+    @ManyToOne
     @NotNull(message = "O tipo não pode ser nulo.")
-    private EntryType type;
+    private EntryType entryType;
 
-    public Double getValue() {
-        return value;
+    public Entry(Long id) {
+        this.id = id;
     }
 
-    public void setValue(Double value) {
-        this.value = value;
+    public Entry() {
+    }
+
+    public Double getEntryValue() {
+        return entryValue;
+    }
+
+    public void setEntryValue(Double EntryValue) {
+        this.entryValue = EntryValue;
     }
 
     public Long getId() {
@@ -65,20 +68,20 @@ public class Entry implements Serializable {
         this.description = description;
     }
 
-    public Date getDate() {
-        return this.date;
+    public Date getEntryDate() {
+        return this.entryDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setEntryDate(Date entryDate) {
+        this.entryDate = entryDate;
     }
 
-    public EntryType getType() {
-        return type;
+    public EntryType getEntryType() {
+        return entryType;
     }
 
-    public void setType(EntryType type) {
-        this.type = type;
+    public void setEntryType(EntryType entryType) {
+        this.entryType = entryType;
     }
 
     @Override
@@ -104,6 +107,6 @@ public class Entry implements Serializable {
 
     @Override
     public String toString() {
-        return "Entry{" + "id=" + id + ", description=" + description + ", date=" + date + ", value=" + value + '}';
+        return "Entry{" + "id=" + id + ", description=" + description + ", date=" + entryDate + ", value=" + entryValue + '}';
     }
 }
