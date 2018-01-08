@@ -35,8 +35,11 @@ public class EntryServiceBean implements EntryService {
 
     @Override
     public List<Entry> selectEntries(String type, Date initialPeriod, Date finalPeriod, String description) {
-        EntryType entryType = entryTypeDAO.selectType(type);
-        System.out.println("\n\n" + entryType.getValue() + "\n\n\n" );
+        EntryType entryType = null;
+        if (type != null) {
+            entryType = entryTypeDAO.selectType(type);
+            System.out.println("\n\n" + entryType.getValue() + "\n\n\n");
+        }
         return entryDao.selectEntries(entryType, initialPeriod, finalPeriod, description);
     }
 
@@ -52,7 +55,14 @@ public class EntryServiceBean implements EntryService {
 
     @Override
     public Entry updateEntry(Entry entry) {
-        return entryDao.updateEntry(entry);
+
+        Entry attached = entryDao.selectEntryById(entry.getId());
+        attached.setDescription(entry.getDescription());
+        attached.setEntryDate(entry.getEntryDate());
+        attached.setEntryType(entry.getEntryType());
+        attached.setEntryValue(entry.getEntryValue());
+
+        return entryDao.updateEntry(attached);
     }
 
 }

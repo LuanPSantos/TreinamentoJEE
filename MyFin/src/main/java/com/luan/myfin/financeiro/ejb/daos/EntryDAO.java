@@ -42,35 +42,26 @@ public class EntryDAO {
     public List<Entry> selectEntries(EntryType type, Date initialPeriod, Date finalPeriod, String description) {
         StringBuilder hql = new StringBuilder("SELECT e FROM Entry e WHERE 1 = 1 ");
 
-        //Solução para gardar a sequencia certa de indices dos parametro ? do statemet
-        // int index = 0;
-        // Map<String, Integer> indexStatement = new HashMap<>();
         if (type != null) {
             hql.append("AND e.entryType.id = :type ");
-            //indexStatement.put("entry_type_id", ++index);
         }
 
         if (initialPeriod != null || finalPeriod != null) {
             if (initialPeriod != null && finalPeriod == null) {
                 hql.append("AND e.entryDate >= :initialPeriod ");
-                // indexStatement.put("entry_date", ++index);
             }
 
             if (initialPeriod == null && finalPeriod != null) {
                 hql.append("AND e.entryDate <= :finalPeriod ");
-                //indexStatement.put("entry_date", ++index);
             }
 
             if (initialPeriod != null && finalPeriod != null) {
                 hql.append("AND e.entryDate BETWEEN :initialPeriod AND :finalPeriod ");
-                //indexStatement.put("entry_date_left", ++index);
-                //indexStatement.put("entry_date_right", ++index);
             }
         }
 
         if (description != null) {
             hql.append("AND e.description like :description ");
-            //indexStatement.put("entry_description", ++index);
         }
 
         System.out.println("String SQL ==> " + hql.toString());
@@ -79,37 +70,31 @@ public class EntryDAO {
 
         if (type != null) {
             query.setParameter("type", type.getValue());
-            //statement.setInt(indexStatement.get("entry_type_id"), type.getId());
             System.out.println("\t type : " + type.getValue());
         }
 
         if (initialPeriod != null || finalPeriod != null) {
             if (initialPeriod != null && finalPeriod == null) {
                 query.setParameter("initialPeriod", initialPeriod);
-                //statement.setDate(indexStatement.get("entry_date"), initialPeriod);
                 System.out.println("\t initialPeriod : " + initialPeriod);
             }
 
             if (initialPeriod == null && finalPeriod != null) {
                 query.setParameter("finalPeriod", finalPeriod);
-                //statement.setDate(indexStatement.get("entry_date"), finalPeriod);
                 System.out.println("\t finalPeriod : " + finalPeriod);
             }
 
             if (initialPeriod != null && finalPeriod != null) {
                 query.setParameter("initialPeriod", initialPeriod);
-                //statement.setDate(indexStatement.get("entry_date_left"), initialPeriod);
                 System.out.println("\t initialPeriod : " + initialPeriod);
 
                 query.setParameter("finalPeriod", finalPeriod);
-                //statement.setDate(indexStatement.get("entry_date_right"), finalPeriod);
                 System.out.println("\t finalPeriod : " + finalPeriod);
             }
         }
 
         if (description != null) {
             query.setParameter("description", "%" + description + "%");
-            //statement.setString(indexStatement.get("entry_description"), "%" + description + "%");
             System.out.println("\t description : " + description);
         }
         return query.getResultList();
@@ -117,7 +102,6 @@ public class EntryDAO {
 
     public Entry updateEntry(Entry entry) {
 
-        //String sql = "UPDATE Entry SET entry_description = ?, entry_date = ?, entry_value = ?, entry_type_id = ? WHERE entry_id = ?";
-        return null;
+        return entityManager.merge(entry);
     }
 }
