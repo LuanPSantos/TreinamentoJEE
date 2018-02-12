@@ -16,7 +16,7 @@ public class EntryConsolidated implements Serializable {
     private String type;
     @Id
     private Double total;
-
+    
     public String getType() {
         return type;
     }
@@ -31,5 +31,10 @@ public class EntryConsolidated implements Serializable {
 
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    @Override
+    public String toString() {
+        return "EntryConsolidated{" + "type=" + type + ", total=" + total + '}';
     }
 }

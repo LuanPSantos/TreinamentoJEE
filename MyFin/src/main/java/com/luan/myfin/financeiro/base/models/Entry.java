@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,7 +34,7 @@ public class Entry implements Serializable {
     @Max(value = 10000000000l, message = "Não é possível inserir um lançamento negativo.")
     private Double entryValue;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @NotNull(message = "O tipo não pode ser nulo.")
     private EntryType entryType;
 

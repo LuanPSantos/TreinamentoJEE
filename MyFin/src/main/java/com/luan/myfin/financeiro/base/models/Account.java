@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -18,14 +17,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
 public class Account implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Date accountDate;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<EntryConsolidated> entries;
 
     public Account() {
-        entries = new ArrayList<>();
     }
 
     public Date getAccountDate() {
@@ -45,7 +42,14 @@ public class Account implements Serializable {
     }
 
     public void addEntryConsolidated(EntryConsolidated entryConsolidated) {
+        createIfNotExists();
         entries.add(entryConsolidated);
+    }
+    
+    private void createIfNotExists(){
+        if(entries == null){
+            entries = new ArrayList<>();
+        }
     }
 
     @Override

@@ -13,29 +13,14 @@ public class AccountDAO {
     private EntityManager entityManager;
 
     public void updateAccount(Account account) {
-
-//            String sql = "UPDATE Account_EntryType ae "
-//                    + "    SET total = (SELECT SUM(entry_value) FROM Entry WHERE entry_date >= ? AND entry_date <= ? and entry_type_id = ae.type_id ) "
-//                    + "    WHERE ae.account_date = ?";
+        entityManager.merge(account);
     }
 
-    public Account insertAccount(Account account) {
-
-//            String sql = "INSERT INTO Account (account_date) values (?)";
-        return null;
+    public void insertAccount(Account account) {
+        entityManager.persist(account);
     }
 
     public Account selectAccount(Date date) {
-
-//            StringBuilder sql = new StringBuilder();
-//            sql.append("SELECT ");
-//            sql.append("a.account_date as date, ");
-//            sql.append("e.type_id as idType, ");
-//            sql.append("ae.total as total ");
-//            sql.append("FROM Account a ");
-//            sql.append("INNER JOIN Account_EntryType ae ON a.account_date = ae.account_date ");
-//            sql.append("INNER JOIN EntryType e on e.type_id = ae.type_id ");
-//            sql.append("WHERE a.account_date = ? ");
-        return null;
+        return entityManager.find(Account.class, date);
     }
 }

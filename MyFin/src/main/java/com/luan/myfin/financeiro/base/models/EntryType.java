@@ -44,4 +44,9 @@ public class EntryType implements Serializable {
         final EntryType other = (EntryType) obj;
         return Objects.equals(this.value, other.value);
     }
+
+    @Override
+    public String toString() {
+        return value;
+    }
 }
