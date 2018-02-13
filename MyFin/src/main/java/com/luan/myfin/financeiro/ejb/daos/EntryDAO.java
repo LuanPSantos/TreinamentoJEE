@@ -1,6 +1,7 @@
 package com.luan.myfin.financeiro.ejb.daos;
 
 import com.luan.myfin.financeiro.base.models.Entry;
+import com.luan.myfin.financeiro.base.models.EntryConsolidated;
 import com.luan.myfin.financeiro.base.models.EntryType;
 import java.sql.Date;
 import java.util.List;

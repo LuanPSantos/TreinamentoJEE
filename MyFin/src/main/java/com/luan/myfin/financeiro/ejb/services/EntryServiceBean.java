@@ -5,11 +5,13 @@ import com.luan.myfin.financeiro.ejb.daos.EntryDAO;
 import com.luan.myfin.financeiro.base.models.Entry;
 import com.luan.myfin.financeiro.base.models.EntryType;
 import com.luan.myfin.financeiro.ejb.daos.EntryTypeDAO;
+import com.luan.myfin.financeiro.ejb.events.EntryEvent;
 import java.sql.Date;
 import java.util.List;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.enterprise.event.Event;
 
 @Stateless
 @Local(EntryService.class)
@@ -21,6 +23,9 @@ public class EntryServiceBean implements EntryService {
     @Inject
     private EntryTypeDAO entryTypeDAO;
 
+    @Inject
+    private Event<EntryEvent> entryEvent;
+
     public EntryServiceBean(EntryDAO dao) {
         this.entryDao = dao;
     }
@@ -30,7 +35,11 @@ public class EntryServiceBean implements EntryService {
 
     @Override
     public Entry insertEntry(Entry entry) {
-        return entryDao.insertEntry(entry);
+        Entry insertedEntry = entryDao.insertEntry(entry);
+
+        fireEvent();
+
+        return insertedEntry;
     }
 
     @Override
@@ -46,6 +55,7 @@ public class EntryServiceBean implements EntryService {
     @Override
     public void deleteEntry(Long id) {
         entryDao.deleteEntry(id);
+        fireEvent();
     }
 
     @Override
@@ -61,8 +71,13 @@ public class EntryServiceBean implements EntryService {
         attached.setEntryDate(entry.getEntryDate());
         attached.setEntryType(entry.getEntryType());
         attached.setEntryValue(entry.getEntryValue());
+        Entry updatedEntry = entryDao.updateEntry(attached);
+        fireEvent();
+        return updatedEntry;
+    }
 
-        return entryDao.updateEntry(attached);
+    private void fireEvent() {
+        entryEvent.fire(new EntryEvent());
     }
 
 }
