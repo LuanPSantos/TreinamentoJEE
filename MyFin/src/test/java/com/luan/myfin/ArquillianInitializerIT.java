@@ -3,7 +3,6 @@ package com.luan.myfin;
 import com.luan.myfin.financeiro.base.interfaces.EntryService;
 import com.luan.myfin.financeiro.base.models.Entry;
 import com.luan.myfin.financeiro.base.models.EntryConsolidated;
-import com.luan.myfin.financeiro.base.models.EntryConsolidatedPK;
 import com.luan.myfin.financeiro.base.models.EntryType;
 import com.luan.myfin.financeiro.base.models.ViolationException;
 import com.luan.myfin.financeiro.base.util.DateUtils;
@@ -45,7 +44,6 @@ public class ArquillianInitializerIT {
                 EntryService.class,
                 Entry.class,
                 EntryConsolidated.class,
-                EntryConsolidatedPK.class,
                 EntryType.class,
                 ViolationException.class,
                 DateUtils.class,

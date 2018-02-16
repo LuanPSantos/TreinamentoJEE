@@ -1,6 +1,7 @@
 package com.luan.myfin.financeiro.ejb.daos;
 
 import com.luan.myfin.financeiro.base.models.Account;
+import com.luan.myfin.financeiro.base.models.EntryConsolidated;
 import java.sql.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -22,5 +23,9 @@ public class AccountDAO {
 
     public Account selectAccount(Date date) {
         return entityManager.find(Account.class, date);
+    }
+
+    public void insertConsolidated(EntryConsolidated consolidateds) {
+        entityManager.persist(consolidateds);
     }
 }

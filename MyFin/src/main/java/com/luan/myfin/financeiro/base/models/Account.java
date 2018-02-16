@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -20,7 +19,7 @@ public class Account implements Serializable {
     @Id
     private Date accountDate;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER)
     private List<EntryConsolidated> entries;
 
     public Account() {
@@ -71,6 +70,11 @@ public class Account implements Serializable {
         }
         final Account other = (Account) obj;
         return Objects.equals(this.accountDate, other.accountDate);
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" + "accountDate=" + accountDate + ", entries=" + entries + '}';
     }
 
 }

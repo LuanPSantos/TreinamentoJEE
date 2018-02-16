@@ -8,6 +8,8 @@ import com.luan.myfin.financeiro.base.models.EntryType;
 import com.luan.myfin.financeiro.base.util.DateUtils;
 import com.luan.myfin.financeiro.ejb.daos.AccountDAO;
 import com.luan.myfin.financeiro.ejb.daos.EntryDAO;
+import com.luan.myfin.financeiro.ejb.daos.EntryTypeDAO;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -29,25 +31,29 @@ public class AccountServiceBean implements AccountService {
     public Account updateCurrentAccount() {
 
         Account account = accountDAO.selectAccount(DateUtils.fistDayOfCurrentMonth());
+        System.out.println("\n\n001" + account);
+        if (account == null) {
+            account = insertAccount(account, null);
+        }
 
+        System.out.println("\n\n002" + account);
         List<Entry> entries = entryDAO.selectEntries(null, DateUtils.fistDayOfCurrentMonth(), DateUtils.lastDayOfCurrentMonth(), null);
         Map<EntryType, List<Entry>> grouped = entries.stream().collect(Collectors.groupingBy(Entry::getEntryType));
 
-        final Account temp = new Account();
+        System.out.println("\n\n003" + grouped);
+        List<EntryConsolidated> consolidateds = new ArrayList<>();
         grouped.keySet().forEach(key -> {
             EntryConsolidated consolidated = new EntryConsolidated();
             consolidated.setTotal(grouped.get(key).stream().mapToDouble(Entry::getEntryValue).sum());
             consolidated.setType(key.getValue());
-            temp.addEntryConsolidated(consolidated);
+            consolidateds.add(consolidated);
+            accountDAO.insertConsolidated(consolidated);
         });
-
-        if (account == null) {
-            account = insertAccount(account, temp.getEntries());
-        } else {
-            account.setEntries(temp.getEntries());
-            accountDAO.updateAccount(account);
-        }
-
+        System.out.println("\n\n004" + consolidateds); 
+        account.setEntries(consolidateds);
+        System.out.println("\n\n005" + account);
+        accountDAO.updateAccount(account);
+        System.out.println("\n\n006" + account); 
         return account;
     }
 

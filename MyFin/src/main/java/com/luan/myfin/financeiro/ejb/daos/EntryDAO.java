@@ -19,7 +19,6 @@ public class EntryDAO {
     public Entry insertEntry(Entry entry) {
 
         entityManager.persist(entry);
-        entityManager.flush();
 
         return entry;
     }
