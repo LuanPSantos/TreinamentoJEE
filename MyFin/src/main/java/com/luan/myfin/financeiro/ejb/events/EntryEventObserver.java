@@ -10,8 +10,8 @@ public class EntryEventObserver {
 
     @EJB
     private AccountService accountService;
-    
-    public void listenToEntry(@Observes EntryEvent entryEvent){
+
+    public void listenToEntry(@Observes EntryEvent entryEvent) {
         accountService.updateCurrentAccount();
     }
 }

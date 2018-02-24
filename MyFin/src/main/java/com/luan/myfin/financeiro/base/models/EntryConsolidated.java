@@ -2,25 +2,13 @@ package com.luan.myfin.financeiro.base.models;
 
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 
-@Entity
-@XmlAccessorType(XmlAccessType.FIELD)
 public class EntryConsolidated implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
     private String type;
 
     private Double total;
-    
+
     public String getType() {
         return type;
     }
@@ -37,23 +25,11 @@ public class EntryConsolidated implements Serializable {
         this.total = total;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "EntryConsolidated{" + "id=" + id + ", type=" + type + ", total=" + total + '}';
-    }
-
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 73 * hash + Objects.hashCode(this.id);
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.type);
+        hash = 59 * hash + Objects.hashCode(this.total);
         return hash;
     }
 
@@ -69,7 +45,18 @@ public class EntryConsolidated implements Serializable {
             return false;
         }
         final EntryConsolidated other = (EntryConsolidated) obj;
-        return Objects.equals(this.id, other.id);
+        if (!Objects.equals(this.type, other.type)) {
+            return false;
+        }
+        if (!Objects.equals(this.total, other.total)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "EntryConsolidated{" + "type=" + type + ", total=" + total + '}';
     }
 
 }

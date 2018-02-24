@@ -5,21 +5,11 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 
-@Entity
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Account implements Serializable {
 
-    @Id
     private Date accountDate;
 
-    @OneToMany(fetch = FetchType.EAGER)
     private List<EntryConsolidated> entries;
 
     public Account() {
@@ -45,9 +35,9 @@ public class Account implements Serializable {
         createIfNotExists();
         entries.add(entryConsolidated);
     }
-    
-    private void createIfNotExists(){
-        if(entries == null){
+
+    private void createIfNotExists() {
+        if (entries == null) {
             entries = new ArrayList<>();
         }
     }
