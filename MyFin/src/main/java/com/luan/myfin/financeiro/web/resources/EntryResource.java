@@ -36,20 +36,22 @@ public class EntryResource {
             @QueryParam("initialPeriod") Date initialPeriod,
             @QueryParam("finalPeriod") Date finalPeriod,
             @QueryParam("description") String description
-    ) {
+    ) throws Exception {
+        throw new Exception("Sei la");
+        /*
         List<Entry> entries = entryService.selectEntries(type, initialPeriod, finalPeriod, description);
 
         if (CollectionUtils.isNotEmpty(entries)) {
             return Response.ok(entries).build();
         } else {
             return Response.noContent().build();
-        }
+        }*/
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response insertEntry(@Context UriInfo uriInfo, @Valid Entry entry) {
+    public Response insertEntry(@Context UriInfo uriInfo, @Valid Entry entry) throws Exception{
         Entry newEntry = entryService.insertEntry(entry);
 
         if (newEntry.getId() != null) {
@@ -63,7 +65,7 @@ public class EntryResource {
     @DELETE
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteEntry(@PathParam("id") Long id) {
+    public Response deleteEntry(@PathParam("id") Long id) throws Exception{
         entryService.deleteEntry(id);
 
         return Response.ok().build();
@@ -72,7 +74,7 @@ public class EntryResource {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response selectEntryById(@PathParam("id") Long id) {
+    public Response selectEntryById(@PathParam("id") Long id) throws Exception{
         Entry entry = entryService.selectEntryById(id);
 
         if (entry != null) {
@@ -86,7 +88,7 @@ public class EntryResource {
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateEntry(@PathParam("id") Long id, @Valid Entry entry) {
+    public Response updateEntry(@PathParam("id") Long id, @Valid Entry entry) throws Exception{
         entry.setId(id);
         Entry newEntry = entryService.updateEntry(entry);
 

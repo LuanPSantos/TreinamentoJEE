@@ -17,7 +17,7 @@ public class AccountResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response selectCurrentAccount() {
+    public Response selectCurrentAccount() throws Exception{
         Account account = service.selectCurrentAccount();
 
         if (account != null) {

@@ -34,7 +34,7 @@ public class EntryServiceBean implements EntryService {
     }
 
     @Override
-    public Entry insertEntry(Entry entry) {
+    public Entry insertEntry(Entry entry) throws Exception{
         Entry insertedEntry = entryDao.insertEntry(entry);
 
         fireEvent();
@@ -43,7 +43,7 @@ public class EntryServiceBean implements EntryService {
     }
 
     @Override
-    public List<Entry> selectEntries(String type, Date initialPeriod, Date finalPeriod, String description) {
+    public List<Entry> selectEntries(String type, Date initialPeriod, Date finalPeriod, String description) throws Exception{
         EntryType entryType = null;
         if (type != null) {
             entryType = entryTypeDAO.selectType(type);
@@ -53,18 +53,18 @@ public class EntryServiceBean implements EntryService {
     }
 
     @Override
-    public void deleteEntry(Long id) {
+    public void deleteEntry(Long id) throws Exception{
         entryDao.deleteEntry(id);
         fireEvent();
     }
 
     @Override
-    public Entry selectEntryById(Long id) {
+    public Entry selectEntryById(Long id) throws Exception{
         return entryDao.selectEntryById(id);
     }
 
     @Override
-    public Entry updateEntry(Entry entry) {
+    public Entry updateEntry(Entry entry) throws Exception{
 
         Entry attached = entryDao.selectEntryById(entry.getId());
         attached.setDescription(entry.getDescription());

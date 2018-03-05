@@ -30,7 +30,7 @@ public class AccountServiceBean implements AccountService {
     private CacheService cacheService;
 
     @Override
-    public void updateCurrentAccount() {
+    public void updateCurrentAccount() throws Exception{
 
         List<EntryConsolidated> consolidateds = getEntriesConsolidated();
         Account account = createAccount(consolidateds);
@@ -38,7 +38,7 @@ public class AccountServiceBean implements AccountService {
     }
 
     @Override
-    public Account selectCurrentAccount() {
+    public Account selectCurrentAccount() throws Exception{
         List<EntryConsolidated> consolidateds = getEntriesConsolidated();
 
         Account account = new Account();

@@ -4,7 +4,7 @@ import com.luan.myfin.financeiro.base.models.Account;
 
 public interface AccountService {
 
-    public void updateCurrentAccount();
+    public void updateCurrentAccount() throws Exception;
 
-    public Account selectCurrentAccount();
+    public Account selectCurrentAccount() throws Exception;
 }
