@@ -1,17 +1,24 @@
 package com.luan.myfin;
 
+import com.luan.myfin.financeiro.base.interfaces.AccountService;
 import com.luan.myfin.financeiro.base.interfaces.EntryService;
+import com.luan.myfin.financeiro.base.models.Account;
 import com.luan.myfin.financeiro.base.models.Entry;
 import com.luan.myfin.financeiro.base.models.EntryConsolidated;
 import com.luan.myfin.financeiro.base.models.EntryType;
 import com.luan.myfin.financeiro.base.models.ViolationException;
 import com.luan.myfin.financeiro.base.util.DateUtils;
 import com.luan.myfin.financeiro.ejb.EntryResourceIntegrationTest;
+import com.luan.myfin.financeiro.ejb.caches.CacheService;
 import com.luan.myfin.financeiro.ejb.daos.DatabaseInitializer;
 import com.luan.myfin.financeiro.ejb.daos.EntryDAO;
 import com.luan.myfin.financeiro.ejb.daos.EntryTypeDAO;
+import com.luan.myfin.financeiro.ejb.events.EntryEvent;
+import com.luan.myfin.financeiro.ejb.events.EntryEventObserver;
+import com.luan.myfin.financeiro.ejb.services.AccountServiceBean;
 import com.luan.myfin.financeiro.ejb.services.EntryServiceBean;
 import com.luan.myfin.financeiro.web.exceptions.ViolationExceptionMapper;
+import com.luan.myfin.financeiro.web.resources.AccountResource;
 import com.luan.myfin.financeiro.web.resources.App;
 import com.luan.myfin.financeiro.web.resources.EntryResource;
 import java.io.File;
@@ -41,17 +48,24 @@ public class ArquillianInitializerIT {
 
         //adiciona as classes que serão deployadas
         archive.addClasses(
+                AccountService.class,
                 EntryService.class,
+                Account.class,
                 Entry.class,
                 EntryConsolidated.class,
                 EntryType.class,
                 ViolationException.class,
                 DateUtils.class,
+                CacheService.class,
                 DatabaseInitializer.class,
                 EntryDAO.class,
                 EntryTypeDAO.class,
+                EntryEvent.class,
+                EntryEventObserver.class,
+                AccountServiceBean.class,
                 EntryServiceBean.class,
                 ViolationExceptionMapper.class,
+                AccountResource.class,
                 App.class,
                 EntryResource.class,
                 ArquillianInitializerIT.class,

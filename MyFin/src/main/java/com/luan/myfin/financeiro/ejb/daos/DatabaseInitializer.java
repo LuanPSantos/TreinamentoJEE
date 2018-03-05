@@ -19,7 +19,7 @@ public class DatabaseInitializer {
         EntryType type1 = new EntryType("ALIMENTACAO");
         EntryType type2 = new EntryType("MORADIA");
         EntryType type3 = new EntryType("EDUCACAO");
-        EntryType type4 = new EntryType("TRANSAPORTE");
+        EntryType type4 = new EntryType("TRANSPORTE");
         EntryType type5 = new EntryType("SAUDE");
         EntryType type6 = new EntryType("LAZER");
         EntryType type7 = new EntryType("OUTROS");

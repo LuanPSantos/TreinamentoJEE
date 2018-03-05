@@ -32,7 +32,6 @@ public class AccountServiceBean implements AccountService {
     @Override
     public void updateCurrentAccount() {
 
-        //Salvar CACHE
         List<EntryConsolidated> consolidateds = getEntriesConsolidated();
         Account account = createAccount(consolidateds);
         cacheService.log(account);
