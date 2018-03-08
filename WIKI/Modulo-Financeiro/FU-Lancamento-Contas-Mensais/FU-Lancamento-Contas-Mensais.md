@@ -35,8 +35,6 @@ As contas são organizadas por tipo de lançamento.
 
 ## Web Services
 
-**[WSDL](Web-Services/WSDL.md)**
-
 | Web Service                                                                              | Descrição                                      |
 |------------------------------------------------------------------------------------------|------------------------------------------------|
 | [WS-Incluir Lancamento Conta Mensal](Web-Services/WS-Incluir-Lancamento-Conta-Mensal.md) | Inclusão de novo Lançamento Conta Mensal       |
