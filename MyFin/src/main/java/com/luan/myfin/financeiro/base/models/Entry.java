@@ -31,7 +31,7 @@ public class Entry implements Serializable {
 
     @NotNull(message = "O valor não pode ser nulo.")
     @Min(value = 0, message = "Não é possível inserir um lançamento negativo.")
-    @Max(value = 10000000000l, message = "Não é possível inserir um lançamento negativo.")
+    @Max(value = 100000000, message = "Não é possível inserir um lançamento com valor maior do que 100000000.")
     private Double entryValue;
 
     @ManyToOne(fetch = FetchType.EAGER)
