@@ -12,48 +12,24 @@ Remoção de Lançamento Conta Mensal existente.
 
 ## Header
 
-**NOTA AO DESENVOLVEDOR:** Coloque aqui a lista de atributos do header, sua obrigatoriedade e valores válidos
-
 | Atributo                          | Obrigatório | Observações                          |
 |-----------------------------------|:-----------:|--------------------------------------|
-| Nome do Atributo (case sensitive) |     S/N     | Descrição do campo e valores válidos |
+| N.H |    N.HN     |  N.H |
 
 
 ## Atributos do Serviço
 
-**NOTA AO DESENVOLVEDOR:** Coloque aqui a lista de atributos da chamada ao WS, sua obrigatoriedade e valores válidos
-
 | Atributo                          | Obrigatório | Observações                          |
 |-----------------------------------|:-----------:|--------------------------------------|
-| Nome do Atributo (case sensitive) |     S/N     | Descrição do campo e valores válidos |
+| id |     S     | Parâmetro do Path |
 
 ## Demais Validações
 
-**NOTA AO DESENVOLVEDOR:** Coloque aqui alguma regra de validação mais especifica (que não seja apenas validação de obrigatoridade de campos)
+N.H.
 
-
-## XML Request
-
-**NOTA AO DESENVOLVEDOR:** Coloque aqui o XML de request padrão
-
-~~~xml
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
-   <soapenv:Header/>
-   <soapenv:Body>
-   </soapenv:Body>
-</soapenv:Envelope>
-~~~
-
-## Response
-
-**NOTA AO DESENVOLVEDOR:** Coloque aqui o XML de response padrão
-
-~~~xml
-<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-   <soap:Body>
-   </soap:Body>
-</soap:Envelope>
-~~~
+## Request
+#### Método e URL
+**DELETE**: http://localhost:8080/myfin/webapi/entry/1
 
 _[Sobre o Portal de Documentação](../../../About/About.md)_
 
