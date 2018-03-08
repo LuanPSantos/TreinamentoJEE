@@ -10,50 +10,61 @@
 
 Inclusão de lançamentos de conta mensal
 
-## Header
+## Método e URL
+**POST**: http://localhost:8080/myfin/webapi/entry
 
-**NOTA AO DESENVOLVEDOR:** Coloque aqui a lista de atributos do header, sua obrigatoriedade e valores válidos
+## Header
 
 | Atributo                          | Obrigatório | Observações                          |
 |-----------------------------------|:-----------:|--------------------------------------|
-| Nome do Atributo (case sensitive) |     S/N     | Descrição do campo e valores válidos |
+| Content-Type |    S     | valor: application/json |
 
 
 ## Atributos do Serviço
 
-**NOTA AO DESENVOLVEDOR:** Coloque aqui a lista de atributos da chamada ao WS, sua obrigatoriedade e valores válidos
-
 | Atributo                          | Obrigatório | Observações                          |
 |-----------------------------------|:-----------:|--------------------------------------|
-| Nome do Atributo (case sensitive) |     S/N     | Descrição do campo e valores válidos |
+| description | S | String genérica |
+| entryDate | S | Dada do pacote java.sql |
+| entryValue | S | Double com valor máximo 100000000 e mínimo de 0 |
+| entryType | S | EntryType com um atributo String value |
 
 ## Demais Validações
 
-**NOTA AO DESENVOLVEDOR:** Coloque aqui alguma regra de validação mais especifica (que não seja apenas validação de obrigatoridade de campos)
+EntryType.value valores válidos:
+ - ALIMENTACAO
+ - MORADIA
+ - EDUCACAO
+ - TRANSPORTE
+ - SAUDE
+ - LAZER
+ - OUTROS
 
+## JSON Request
 
-
-## XML Request
-
-**NOTA AO DESENVOLVEDOR:** Coloque aqui o XML de request padrão
-
-~~~xml
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
-   <soapenv:Header/>
-   <soapenv:Body>
-   </soapenv:Body>
-</soapenv:Envelope>
+~~~json
+{
+    "description": "Teste 1",
+    "entryDate": "2018-03-12",
+    "entryValue": 1,
+    "entryType": {
+    	"value": "ALIMENTACAO"
+    }
+}
 ~~~
 
 ## Response
 
-**NOTA AO DESENVOLVEDOR:** Coloque aqui o XML de response padrão
-
-~~~xml
-<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-   <soap:Body>
-   </soap:Body>
-</soap:Envelope>
+~~~json
+{
+    "id": 1,
+    "description": "Teste 1",
+    "entryDate": "2018-03-12",
+    "entryValue": 1,
+    "entryType": {
+        "value": "ALIMENTACAO"
+    }
+}
 ~~~
 
 _[Sobre o Portal de Documentação](../../../About/About.md)_
