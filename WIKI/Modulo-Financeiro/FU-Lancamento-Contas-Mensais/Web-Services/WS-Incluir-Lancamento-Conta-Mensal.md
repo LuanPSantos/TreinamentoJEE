@@ -10,9 +10,6 @@
 
 Inclusão de lançamentos de conta mensal
 
-## Método e URL
-**POST**: http://localhost:8080/myfin/webapi/entry
-
 ## Header
 
 | Atributo                          | Obrigatório | Observações                          |
@@ -41,7 +38,8 @@ EntryType.value valores válidos:
  - OUTROS
 
 ## JSON Request
-
+#### Método e URL
+**POST**: http://localhost:8080/myfin/webapi/entry
 ~~~json
 {
     "description": "Teste 1",
