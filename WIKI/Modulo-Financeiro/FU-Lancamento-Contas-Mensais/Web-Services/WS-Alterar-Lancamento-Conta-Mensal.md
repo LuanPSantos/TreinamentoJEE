@@ -25,6 +25,7 @@ Alteração de lançamentos de conta mensal.
 | entryDate | S | Dada do pacote java.sql |
 | entryValue | S | Double com valor máximo 100000000 e mínimo de 0 |
 | entryType | S | EntryType com um atributo String value |
+| id | S | Parâmetro do Path |
 
 ## Demais Validações
 
