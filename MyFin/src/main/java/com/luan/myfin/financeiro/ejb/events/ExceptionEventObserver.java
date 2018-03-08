@@ -1,14 +1,16 @@
 
 package com.luan.myfin.financeiro.ejb.events;
 
-import java.io.IOException;
+import javax.ejb.Stateless;
 import javax.enterprise.event.Observes;
 
+@Stateless
 public class ExceptionEventObserver {
     
-    
-    public void listenToException(@Observes ExceptionEvent event) throws IOException{
+    public void listenToException(@Observes ExceptionEvent event){
         
-        System.out.println(event.getException());
+        System.out.println("\nErro interno:");
+        event.getException().printStackTrace();
+        System.out.println();
     }
 }

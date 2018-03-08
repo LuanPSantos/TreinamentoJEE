@@ -31,21 +31,18 @@ public class EntryResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response selectEntries(
-            //TODO: Bean validation
             @QueryParam("type") String type,
             @QueryParam("initialPeriod") Date initialPeriod,
             @QueryParam("finalPeriod") Date finalPeriod,
             @QueryParam("description") String description
     ) throws Exception {
-        throw new Exception("Sei la");
-        /*
         List<Entry> entries = entryService.selectEntries(type, initialPeriod, finalPeriod, description);
 
         if (CollectionUtils.isNotEmpty(entries)) {
             return Response.ok(entries).build();
         } else {
             return Response.noContent().build();
-        }*/
+        }
     }
 
     @POST

@@ -8,6 +8,7 @@ import com.luan.myfin.financeiro.base.models.EntryConsolidated;
 import com.luan.myfin.financeiro.base.models.EntryType;
 import com.luan.myfin.financeiro.base.models.ViolationException;
 import com.luan.myfin.financeiro.base.util.DateUtils;
+import com.luan.myfin.financeiro.base.util.LoggerInterceptor;
 import com.luan.myfin.financeiro.ejb.EntryResourceIntegrationTest;
 import com.luan.myfin.financeiro.ejb.caches.CacheService;
 import com.luan.myfin.financeiro.ejb.daos.DatabaseInitializer;
@@ -56,6 +57,7 @@ public class ArquillianInitializerIT {
                 EntryType.class,
                 ViolationException.class,
                 DateUtils.class,
+                LoggerInterceptor.class,
                 CacheService.class,
                 DatabaseInitializer.class,
                 EntryDAO.class,

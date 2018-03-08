@@ -4,17 +4,22 @@ import com.luan.myfin.financeiro.base.interfaces.EntryService;
 import com.luan.myfin.financeiro.ejb.daos.EntryDAO;
 import com.luan.myfin.financeiro.base.models.Entry;
 import com.luan.myfin.financeiro.base.models.EntryType;
+import com.luan.myfin.financeiro.base.util.LoggerInterceptor;
 import com.luan.myfin.financeiro.ejb.daos.EntryTypeDAO;
 import com.luan.myfin.financeiro.ejb.events.EntryEvent;
 import java.sql.Date;
 import java.util.List;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.enterprise.event.Event;
+import javax.interceptor.Interceptors;
 
 @Stateless
 @Local(EntryService.class)
+@Interceptors( {LoggerInterceptor.class} )
 public class EntryServiceBean implements EntryService {
 
     @Inject
@@ -34,6 +39,7 @@ public class EntryServiceBean implements EntryService {
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Entry insertEntry(Entry entry) throws Exception{
         Entry insertedEntry = entryDao.insertEntry(entry);
 
@@ -47,12 +53,12 @@ public class EntryServiceBean implements EntryService {
         EntryType entryType = null;
         if (type != null) {
             entryType = entryTypeDAO.selectType(type);
-            System.out.println("\n\n" + entryType.getValue() + "\n\n\n");
         }
         return entryDao.selectEntries(entryType, initialPeriod, finalPeriod, description);
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void deleteEntry(Long id) throws Exception{
         entryDao.deleteEntry(id);
         fireEvent();
@@ -64,6 +70,7 @@ public class EntryServiceBean implements EntryService {
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Entry updateEntry(Entry entry) throws Exception{
 
         Entry attached = entryDao.selectEntryById(entry.getId());

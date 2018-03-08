@@ -6,6 +6,7 @@ import com.luan.myfin.financeiro.base.models.Entry;
 import com.luan.myfin.financeiro.base.models.EntryConsolidated;
 import com.luan.myfin.financeiro.base.models.EntryType;
 import com.luan.myfin.financeiro.base.util.DateUtils;
+import com.luan.myfin.financeiro.base.util.LoggerInterceptor;
 import com.luan.myfin.financeiro.ejb.caches.CacheService;
 import com.luan.myfin.financeiro.ejb.daos.EntryDAO;
 import java.sql.Date;
@@ -17,10 +18,14 @@ import java.util.stream.Collectors;
 import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 
 @Stateless
 @Local(AccountService.class)
+@Interceptors( {LoggerInterceptor.class} )
 public class AccountServiceBean implements AccountService {
 
     @Inject
@@ -30,6 +35,7 @@ public class AccountServiceBean implements AccountService {
     private CacheService cacheService;
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void updateCurrentAccount() throws Exception{
 
         List<EntryConsolidated> consolidateds = getEntriesConsolidated();

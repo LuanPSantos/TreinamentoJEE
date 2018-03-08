@@ -84,7 +84,7 @@ public class EntryResourceIntegrationTest extends ArquillianInitializerIT {
     @Before
     public void before() throws InterruptedException {
         client = ClientBuilder.newClient();
-        target = client.target("http://localhost:8080/webapi/entry");
+        target = client.target("http://localhost:8080/myfin/webapi/entry");
     }
 
     @After
@@ -103,8 +103,6 @@ public class EntryResourceIntegrationTest extends ArquillianInitializerIT {
     public void it_should_insert_entry() {
         Entry entry = createEntries().get(5);
 
-        client = ClientBuilder.newClient();
-        target = client.target("http://localhost:8080/webapi/entry");
         try {
             Entity<Entry> entity = Entity.entity(entry, MediaType.APPLICATION_JSON);
             Response response = target
@@ -120,7 +118,6 @@ public class EntryResourceIntegrationTest extends ArquillianInitializerIT {
             assertEquals(new EntryType("TRANSPORTE"), newEntry.getEntryType());
             assertEquals("Teste 6", newEntry.getDescription());
             assertEquals(600.0d, newEntry.getEntryValue(), 0.000001);
-            //assertEquals(new Date(1509494400000L).toString(), newEntry.getDate().toString());
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -140,7 +137,6 @@ public class EntryResourceIntegrationTest extends ArquillianInitializerIT {
             assertEquals(1, entries.size());
             assertEquals("Teste 6", entries.get(0).getDescription());
             assertEquals(600.0d, entries.get(0).getEntryValue(), 0.0001);
-            //assertEquals(DateUtils.today().withDayOfMonth(15), entries.get(4).getEntryDate());
             assertEquals(new EntryType("TRANSPORTE"), entries.get(0).getEntryType());
         } catch (Exception e) {
             fail(e.getMessage());
@@ -164,9 +160,7 @@ public class EntryResourceIntegrationTest extends ArquillianInitializerIT {
             assertEquals("Teste 6", entries.get(0).getDescription());
             assertEquals(600.0d, entries.get(0).getEntryValue(), 0.0001);
             assertEquals(new EntryType("TRANSPORTE"), entries.get(0).getEntryType());
-            //assertEquals(new Date(1509494400000L), entries.get(0).getEntryDate());
         } catch (Exception e) {
-            e.printStackTrace();
             fail(e.getMessage());
         }
     }
@@ -206,7 +200,6 @@ public class EntryResourceIntegrationTest extends ArquillianInitializerIT {
             assertEquals(1, entries.size());
             assertEquals("Teste 6", entries.get(0).getDescription());
             assertEquals(600.0d, entries.get(0).getEntryValue(), 0.0001);
-            //assertEquals(new Date(1509753600000L), entries.get(0).getEntryDate());
             assertEquals(new EntryType("TRANSPORTE"), entries.get(0).getEntryType());
         } catch (Exception e) {
             fail(e.getMessage());
@@ -227,7 +220,6 @@ public class EntryResourceIntegrationTest extends ArquillianInitializerIT {
             assertEquals(1, entries.size());
             assertEquals("Teste 6", entries.get(0).getDescription());
             assertEquals(600.0d, entries.get(0).getEntryValue(), 0.0001);
-            //assertEquals(new Date(1510358400000L), entries.get(0).getEntryDate());
             assertEquals(new EntryType("TRANSPORTE"), entries.get(0).getEntryType());
         } catch (Exception e) {
             fail(e.getMessage());
@@ -246,7 +238,6 @@ public class EntryResourceIntegrationTest extends ArquillianInitializerIT {
 
             assertEquals("Teste 6", entry.getDescription());
             assertEquals(600.0d, entry.getEntryValue(), 0.0001);
-            //assertEquals(new Date(1509494400000L), entry.getEntryDate());
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -266,7 +257,6 @@ public class EntryResourceIntegrationTest extends ArquillianInitializerIT {
             assertEquals(1, entries.size());
             assertEquals("Teste 6", entries.get(0).getDescription());
             assertEquals(600.0d, entries.get(0).getEntryValue(), 0.0001);
-            //assertEquals(new Date(1510272000000L), entries.get(0).getEntryDate());
         } catch (Exception e) {
             fail(e.getMessage());
         }
