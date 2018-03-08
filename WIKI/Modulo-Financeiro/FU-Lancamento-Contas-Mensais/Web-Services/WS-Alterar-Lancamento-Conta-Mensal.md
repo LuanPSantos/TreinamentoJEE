@@ -10,9 +10,6 @@
 
 Alteração de lançamentos de conta mensal.
 
-## Método e URL
-**PUT**: http://localhost:8080/myfin/webapi/entry/1
-
 ## Header
 
 | Atributo                          | Obrigatório | Observações                          |
@@ -41,6 +38,8 @@ EntryType.value valores válidos:
  - OUTROS
 
 ## JSON Request
+#### Método e URL
+**PUT**: http://localhost:8080/myfin/webapi/entry/1
 
 ~~~json
 {
